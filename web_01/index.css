@@ -1,0 +1,192 @@
+*{padding: 0;margin: 0;}
+body{font-family: "微软雅黑"; font-size: 12px;min-width: 1000px;}
+input{outline: none;}
+ul{list-style: none;}
+img{border: 0;}
+a{text-decoration: none;}
+
+.clearfix{*zoom:1;}
+.clearfix:after{content:"\20";height:0;display: block;visibility: hidden; clear: both;}
+
+
+
+/*header*/
+.headwrap{width:100%;background-color: #443c3c;}
+.header{width:1000px;height:85px;margin: 0 auto;position: relative;}
+.header a{display: block;}
+.header h1 a{width:480px;height: 85px;background: url(images/logo.jpg);}
+.header h1 strong{text-indent: -9999px;}
+.header .contact{width: 194px;position: absolute;right:0;top:5px;}
+.header .xinlang,.header .tengxun{width:80px;height:19px;float:right;}
+.header .xinlang{background: url(images/xinlang.png);margin-left: 5px;}
+.header .tengxun{background: url(images/tengxun.png);}
+.header .tell{height:28px;width:194px;background: url(images/tell.png);float:right;margin-top: 14px;}
+
+
+
+/*nav*/
+.navwrap{width:100%;background: url(images/nav_bg.jpg) repeat-x;}
+.nav{width:1000px;height:45px;margin: 0 auto;position: relative;}
+.nav ul{padding-top: 10px;}
+.nav ul li{float:left;width:83px;line-height: 29px;text-align: center;margin: 0 4px;position: relative;}
+.nav ul li>a{color:#fff;font-size: 14px;display: inline-block;;width:83px;height: 29px; }
+.li_light{background-color:#fff;border-radius: 1px;}
+.nav ul li>.a_light{color:#000;}
+
+.nav li dl{position: absolute;color:#2d2d2d;width:300px;display:none;opacity:0;filter:alpah(opacity=0);}
+.nav dl {top:37px;left:-4px;}
+.nav dl a{color:#626262;}
+.nav li dl dt{position: absolute;height:0;width:0;border: 8px solid transparent;border-bottom: 8px solid #fff;top:-18px;left:40px;}
+.nav li dl dd{float:left;margin-right: 26px;}
+
+/*cursor:pointer/default;改变鼠标手型
+ 由于每个li标签的宽度指定83px了，
+子元素dl 如果浮动或者定位 不指定宽度那么他的宽度就是83px 
+，这样元素就不能排在同一行  所以必须指定宽度*/
+.nav_right{position: absolute;top:-3px;right: 0; }
+.nav_right .login{height: 45px;width: 92px;	display: inline-block;background: url(images/login.png);}
+.nav_right .logo_360{height: 45px;width: 191px;display: inline-block;background: url(images/360.png);}
+.nav_right .baby{position: absolute;visibility:hidden;height: 50px;width: 50px;background: url(images/baby.png);bottom:9px;left:27px;}
+
+
+/*special*/
+.specialwrap{width:100%;background: url(images/specialbg.jpg) repeat-x;}
+.special{width:1000px;margin: 0 auto;height:44px;padding:23px 0 18px 0;}
+.special   .left,.special .between,.special .right{float:left;}
+.special   .left{width:351px;}
+.special   .between{width:335px;}
+.special   .right{width:313px;}
+.special   h3{width:31px;height:31px;background-color: #009bda;color:#fff;padding:6px;line-height: 16px;border-radius: 2px;float:left;}
+.between   h3{background-color: #e73331;}
+.right     h3{background-color: #00ac1c;}
+.special   li{float:left;line-height: 22px;margin-right: 10px;}
+.special   li a{color:#000;}
+.special   li span{color:#000;font-weight: bold;}
+.special   .contop,.special  .conbottom{width: 230px;float:left;margin-left: 11px;}
+
+
+
+/*ad*/
+/*失误ad的元素全部绝对定位 不是浮动 所以对ad 清楚浮动（clearfix）没有用 必须要对ad指定高度
+ 否则ad高度为0 子元素浮动无效*/
+.ad{width: 100%;background-color: #0088c6;position: relative;position: relative;height: 372px;}
+.adwrap li{position: absolute;top:0;left:0;opacity:0;}
+.adwrap li:nth-of-type(1){opacity:1;z-index: 2;}
+
+
+
+#register,#ad_btn{position: absolute;}
+#register{top:0;left:50%;width:312px;background-color: #fff;margin-left:190px;z-index: 20;}
+
+#register h2{font-size: 18px;font-family: "宋体";height:56px;background: url(images/bg.png) 0 0 ;line-height: 56px;color:#fff;text-align: center;}
+#register p{background-color: #f0f0f0;width:287px;height: 44px;margin: 8px 7px 12px 7px;color:#666666;line-height: 18px;padding: 7px  0 0 11px;}
+#register form div{color:#353535;margin: 0 0 7px 18px; }
+.name input,.age input,.phone input,.option input,.latest input,.know input{width:194px;height:21px;margin-left: 13px;
+	        padding-left: 7px;font-size: 12px;font-family: "微软雅黑";}
+
+.age input:nth-of-type(1),.age input:nth-of-type(2),.age input:nth-of-type(3){width:53px;background: url(images/bg.png) 36px -324px no-repeat;border:1px solid #acacac;}
+.age input:nth-of-type(2),.age input:nth-of-type(3){width:45px;padding-right:5px;background-position:33px -324px ; }
+
+#register form .btn{width:118px;height:34px;background: url(images/bg.png) 0 -56px;border:0;color:#fff;font-family: "微软雅黑";font-size: 14px;text-indent: -24px;margin: 11px 0;}
+#register form span{background: url(images/bg.png) 0 -376px no-repeat;color:#6c6c6c;display: inline-block;width:90px;height:12px;line-height:12px;padding-left: 18px;margin-left: 36px;}	        
+#register .gift{position: absolute;width:108px;height: 108px;background: url(images/register_info.png);top:-6px;right:-6px;}
+
+
+#ad_btn{bottom:5px;left:50%;z-index: 20;margin-left:-480px; }
+/*使用background-color:rgba()可以让父元素的透明度不影响子元素*/
+#btns{background-color:rgba(0,0,0,0.19);border-radius: 2px;padding:0 6px;}
+#ad_btn>div{float:left;}
+#btns div{padding:8px 0  0 44px;width:102px;height:42px;float:left;margin:4px;border-radius: 2px;border: 1px solid #ddcac0;}
+.tripple_L,.tripple_R{width:14px;height:46px;}
+.tripple_L:hover,.tripple_R:hover,#btns div:hover{cursor: pointer;}
+.tripple_L{margin:5px -4px 0 0 ;background: url(images/bg.png)  -80px -322px no-repeat;}
+.tripple_R{margin:5px 0 0 -4px;background: url(images/bg.png)  -91px -322px no-repeat;}
+#ad_btn h3{color:#b7b7b7;font-size: 13.15px;} 
+#ad_btn h3.active{color:#6cd2f8;}
+#ad_btn p{color:#878787;font-size: 10px;} 
+#btns div:nth-of-type(1){background:#fff url(images/pic1.jpg)  5px 11px no-repeat;}
+#btns div:nth-of-type(2){background:#fff url(images/pic2.jpg)  5px 11px no-repeat;}
+#btns div:nth-of-type(3){background:#fff url(images/pic3.jpg)  5px 11px no-repeat;}
+#btns div:nth-of-type(4){background:#fff url(images/pic4.jpg)  5px 11px no-repeat;}
+
+
+
+
+
+
+
+
+/*content*/
+.contentwrap{width:100%;background-color: #f2f2f2;}
+.content {width: 1000px;margin: 0 auto;padding: 40px 0 20px 0;}
+.video,.pk,.trial,.course,.service,.teacher{background-color:#fff;width:305px;border-radius: 1px;border:1px solid #d4d4d4;float:left;margin-bottom: 25px;padding: 4px;}
+.pk,.service{margin: 0 27px 25px 27px;}
+.content h3{font-size:13.3px;height:22px;margin: 13px 26px 12px 26px;line-height: 30px;color: #929292;}
+.content p{font-size:11.34px;line-height:18px;margin: 0 0 31px 26px;color:#525050;}
+
+.video h3{padding-left: 76px;background:  url(images/bg.png)  -119px -56px no-repeat;}
+.pk h3{padding-left: 94px;background:  url(images/bg.png)  -119px -77px no-repeat;}
+.trial h3{padding-left: 117px;background:  url(images/bg.png)  -119px -98px no-repeat;}
+.trial p strong{color:#e03e36;font-weight: normal;}
+.course h3{padding-left: 88px;background:  url(images/bg.png)  -119px -119px no-repeat;}
+.service h3{padding-left: 93px;background:  url(images/bg.png)  -119px -140px no-repeat;}
+.teacher h3{padding-left: 109px;background:  url(images/bg.png)  -119px -161px no-repeat;}
+
+
+.pic>a{position: relative;display: block;width:305px; height:149px;overflow: hidden;padding-bottom: 3px;}
+.pic>a div{position: absolute;width:305px; height:149px;background:#000 url(images/video_btn.png) center no-repeat;opacity:0;top:0;left:0;}
+
+.video .pic>a div{background:#000 url(images/video_btn.png) center no-repeat;}
+.pk .pic>a div{background:#000 url(images/pk_btn.png) center no-repeat;}
+.pic>a div:hover{opacity:0.46;}
+
+.teacher .pics_con{position: relative;height:153px;overflow: hidden;}
+.teacher ul {height: auto;position: absolute;top:0;left:0;}
+.teacher ul li {float:left;margin: 0 2px 1px 0;}
+.teacher h3{margin-top: 12px;}
+
+
+
+
+
+
+
+
+
+
+
+/*home*/
+.home{width:958px;margin: 0 auto; padding:30px 32px 61px 10px;}
+.h_about,.h_course,.h_improve,.h_news{float:left;}
+.h_about{width: 133px;margin-right: 110px;} .h_course{width: 159px;margin-right: 92px;} .h_improve{width: 193px;margin-right: 57px;}  .h_news{width: 214px;}
+.home h3{font-size:14px;height:22px;/*margin: 13px 26px 12px 26px;*/line-height: 31px;color: #5f5f5f;margin-bottom: 17px;}
+
+.h_about h3{padding-left: 73px;background:  url(images/bg.png)  -119px -182px no-repeat;}
+.h_course h3{padding-left: 83px;background:  url(images/bg.png)  -119px -322px no-repeat;}
+.h_improve h3{padding-left: 93px;background:  url(images/bg.png)  -119px -343px no-repeat;}
+.h_news h3{padding-left: 66px;background:  url(images/bg.png)  -119px -364px no-repeat;}
+
+.home li{line-height: 20px;}
+.home a {color:#666666;}
+.h_news span{background: url(images/bg.png) 0px -345px no-repeat;width: 33px;height: 11px;display: inline-block;margin-left: 5px;}
+
+
+
+
+/*footer*/
+.footwrap{height:202px;background-color: #3a3633;}
+.footer{width:1000px;margin: 0 auto;position: relative;}
+.footer .left dl{color:#9e9d9d;height: 28px;width:510px;background:url(images/bg.png) 0 -416px;margin-bottom: 48px;border-radius: 2px;}
+.footer .left dt,.footer .left dd{float:left;line-height: 28px;height:28px;}
+.footer .left dt{width:65px;text-align: center;background:url(images/bg.png) 0 -388px;color:#fff;border-right: 1px solid #0171a6;}
+.footer .left dd a{color:#716b6b;}
+.footer .left dd{margin-left:6px;}
+
+
+.footer .left p{color:#9e9d9d;clear:both;line-height: 18px;}
+.footer .left span {height: 20px;width: 20px;display:inline-block;margin-left: 6px;background: url(images/bg.png)  0px -356px no-repeat;}
+.footer .right{position: absolute; top:11px;right:2px;}
+.footer .qq,.footer .xinlang,.footer .weixin{float:left;height:102px;border:1px solid #cecece;}
+.footer .qq{width:136px;background: url(images/bg.png) 0 -220px ;margin-right: 14px;}
+.footer .xinlang{width:77px;background: url(images/bg.png) -136px -220px ;margin-right: 11px;}
+.footer .weixin{width:77px;background: url(images/bg.png) -216px -220px ;}

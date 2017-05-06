@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title></title>
+    <meta name="name" content="content" charset="utf-8"/>
+    <style media="screen" type="text/css">
+      *{margin:0;padding:0;}
+    </style>
+    <script type="text/javascript">
+        //绘制地图坐标
+        function Map(){
+          //私有成员
+          var w=800;
+          var h=400;
+          this.showMap=function(){
+            //创建div、设置css样式、追加到body
+            var tu=document.createElement('div');
+            tu.style.width=w;
+            tu.style.height=h;
+            tu.style.backgroundImage="url('bg.png')";
+            document.body.appendChild(tu);
+          }
+        }
+        //绘制随机点
+        function Food(){
+          var len=20;
+          this.showFood=function(){
+            //创建div、设置css样式、追加到body
+            var Randot=document.createElement('div');
+            Randot.style.width=Randot.style.height=len+'px';
+            Randot.style.borderRadius=len+'px';
+            Randot.style.backgroundColor="green";
+            //随机点设置绝对定位
+            //随机点位置随机摆放
+            //移动步进值
+            //随机点权值坐标 X轴(0-39) Y轴(0-19)
+            //随机点真实坐标
+            var xRandot=Math.floor(Math.random()*40);
+            var yRandot=Math.floor(Math.random()*20);
+            Randot.style.position='absolute';
+            Randot.style.left=xRandot*len+(len/2);
+            Randot.style.top=yRandot*len+(len/2);
+            document.body.appendChild(Randot);
+          }
+        }
+        window.onload=function(){
+          var map=new Map();
+          map.showMap();
+          var i=0;
+          while(i<10){
+            var fd=new Food();
+            fd.showFood();
+            i++;
+          }
+        }
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

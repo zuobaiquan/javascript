@@ -1,0 +1,29 @@
+<head>
+    <meta charset="UTF-8">
+    <title>angularjs select 三级联动</title>
+
+    <head>
+        <meta charset="utf-8">
+        <script src="angular.js"></script>
+        <script src="main.js"></script>
+    </head>
+
+    <body ng-app="a">
+
+        <div ng-controller='b'>
+            <label>省份：
+        <select ng-model="ppid" ng-options="p.id as p.name for p in provinceArr" ng-change="changeXX()" >
+        </select>
+    </label>
+            <label>市：
+        <select ng-model="ccid" ng-options="c.id as c.name for c in cityArr" ng-change="changeYY()" >
+        </select>
+    </label>
+            <label>区域：
+        <select ng-model="aaid" ng-options="a.id as a.name for a in areaArr" ng-change="changeZZ()" >
+        </select>
+    </label>
+        </div>
+    </body>
+
+    </html>

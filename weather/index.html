@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Show the local weather</title>
+    <link rel='stylesheet prefetch' href='http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js'>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E577a29e33bc8df7619f6c364501fd09"></script>
+  </head>
+<body>
+  <div class="container">
+    <div class="row" id="today">
+      <p class="tips">今天</p>
+      <div id="icon">
+        <img src="http://api.map.baidu.com/images/weather/day/xiaoyu.png" alt="" />
+      </div>
+      <div class="temp">15</div>
+    </div>
+    <div class="row" id="future">
+      <div class="wrap">
+        <div id="next1">
+          <p class="tips">明天</p>
+          <div class="icon">
+            <img src="http://api.map.baidu.com/images/weather/day/xiaoyu.png" alt="" />
+          </div>
+          <span class="temp">17</span>
+        </div>
+        <div id="next2">
+          <p class="tips">后天</p>
+          <div class="icon">
+            <img src="http://api.map.baidu.com/images/weather/day/xiaoyu.png" alt="" />
+          </div>
+          <div class="temp">17</div>
+        </div>
+        <div id="next3">
+          <p class="tips">大后天</p>
+          <div class="icon">
+            <img src="http://api.map.baidu.com/images/weather/day/xiaoyu.png" alt="" />
+          </div>
+          <div class="temp">17</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="wrap">
+        <div id="location" class="detail">HangZhou</div>
+        <div id="weather" class="detail">Rain</div>
+        <div id="wind" class="detail">NE 6.68 knots</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
