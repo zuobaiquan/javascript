@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js 基本类型-引用类型-深浅拷贝</title>
+	<script type="text/javascript">
+		var obj=new Object();
+		obj.name="zuobaiquan";
+		var str="zbq";
+		str.age=20;
+		console.log(obj.name);// zuobaiquan
+		console.log(str.age);// undefined
+
+		var a = 1;
+		var b = a;
+		a = 2;
+		console.log(a);//输出2；
+		console.log(b);//输出1；
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

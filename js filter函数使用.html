@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		// js 自带的 filter()方法: 它用于把Array的某些元素过滤掉，然后返回剩下的元素组成的数组。
+		// array.filter(callback[, thisObject]);
+		// 参数说明：callback：要对每个数组元素执行的回调函数。
+		// 调用时使用参数 element(数组的每一个元素), index(数组的索引), array(数组本身)
+		// thisObject ：在执行回调函数时定义的this对象。
+		//  和map类似，Array的filter也接收一个函数。但是和map不同的是， filter把传入的函数依次作用于每个元素，然后根据返回值是 true 还是false决定保留还是丢弃该元素。
+		//实例1 在一个Array中，删掉偶数，只保留奇数，可以这么写：
+		var arrData = [1, 2, 4, 5, 6, 9, 10, 15];
+		var res = arrData.filter(function (x) {
+		 return x % 2 !== 0;
+		});
+		console.log(res); // [1, 5, 9, 15]
+
+		//实例2 用filter()筛选出素数
+		function get_primes(arr) {
+			var result = [];
+			result = arr.filter(function(n){
+		       var flag = false;
+		       if(n>1){
+		            flag = true;
+		            for(var i=2; i<n; i++){
+		                if(n%i==0){
+	                       flag = false;
+	                       break;
+		                }
+		             }
+		        }
+		        return flag;
+			 });
+			 return result;
+		}
+
+		// 测试:
+		var arr=[];
+		for (x = 1; x < 20; x++) {
+		    arr.push(x);
+		}
+		r = get_primes(arr);
+		console.log(r);// [2, 3, 5, 7, 11, 13, 17, 19]
+	</script>
+</head>
+<body>
+</body>
+</html>
