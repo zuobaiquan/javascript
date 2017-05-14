@@ -10,5 +10,7 @@
 
 [随机生成10个点](https://zuobaiquan.github.io/web/snack/index.html)
 
+[小型天气预报]([https://zuobaiquan.github.io/web/weather/index.html])
+
 
 
