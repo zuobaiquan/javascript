@@ -117,7 +117,7 @@ function f1(n){
 arr[2](); //2
 ```
 
-
+更多学习资料：http://www.jb51.net/article/24101.htm
 
 
 
