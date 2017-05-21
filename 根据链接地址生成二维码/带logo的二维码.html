@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QR-DEMO</title>
+<link rel="stylesheet" type="text/css" href="index.css">	
+<style>
+body{ text-align:center;}
+</style>
+<script src="qrcode.js"></script>
+<script>
+window.onload=function(){
+	var oQrCode=document.getElementById('qrcode');
+	var oT=document.getElementById('t1');
+	var oT2=document.getElementById('t2');
+	var oBtn=document.getElementById('btn1');
+	var oSpan=document.querySelector('#qrcode .img');
+	
+	var qrCode=new QRCode(oQrCode,{width:200, height:200});
+	
+	qrCode.makeCode('http://www.itstrive.com');	 //默认随便给一个
+	
+	oBtn.onclick=function(){
+		oSpan.style.backgroundImage='url('+oT2.value+')';
+		qrCode.makeCode(oT.value);	
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="qrcode">
+	<span class="img"></span>
+</div>
+二维码地址：<input type="text" id="t1">
+中心图像地址:<input type="url" id="t2">
+<input type="button" value="生成二维码" id="btn1">
+</body>
+</html>
