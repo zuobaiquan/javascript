@@ -207,13 +207,3 @@ checkscope()();
 ## 重要参考
 
 [《一道js面试题引发的思考》](https://github.com/kuitos/kuitos.github.io/issues/18)
-
-本文写的太好，给了我很多启发。感激不尽！
-
-## 深入系列
-
-JavaScript深入系列目录地址：[https://github.com/mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog)。
-
-JavaScript深入系列预计写十五篇左右，旨在帮大家捋顺JavaScript底层知识，重点讲解如原型、作用域、执行上下文、变量对象、this、闭包、按值传递、call、apply、bind、new、继承等难点概念。
-
-如果有错误或者不严谨的地方，请务必给予指正，十分感谢。如果喜欢或者有所启发，欢迎star，对作者也是一种鼓励。

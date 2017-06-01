@@ -1,14 +1,39 @@
 # JavaScript深入之继承的多种方式和优缺点
 
 > JavaScript深入系列第十五篇，讲解JavaScript各种继承方式和优缺点。
- 
+
 ## 写在前面
 
 本文讲解JavaScript各种继承方式和优缺点。
 
-注意：
+```javascript
+function Foo(){}
+var f1=new Foo();
+f1.a=10;
+Foo.prototype.a = 100;
+Foo.prototype.b = 200;
+console.log(f1.a);//10
+console.log(f1.b);//200
+for(var item in f1){
+  console.log("item",item);
+  //item a
+  //item b
+}
+for(var item in f1){
+  if(f1.hasOwnProperty(item)){
+    console.log("hasOwnProperty",item);
+    //hasOwnProperty a
+  }
+}
+//对象的原型链是沿着__proto__这条线走的，因此在查找f1.hasOwnProperty属性时，就会顺着原型链一直查找到Object.prototype。
+//由于所有的对象的原型链都会找到Object.prototype，因此所有的对象都会有Object.prototype的方法。这就是所谓的"继承"。
+```
 
-跟《JavaScript深入之创建对象》一样，更像是笔记，哎，再让我感叹一句：《JavaScript高级程序设计》写得真是太好了！
+以上代码中，f1是Foo函数new出来的对象，f1.a是f1对象的基本属性，f1.b是怎么来的呢？——从Foo.prototype得来，因为f1.__proto__指向的是Foo.prototype
+
+**访问一个对象的属性时，先在基本属性中查找，如果没有，再沿着proto这条链向上找，这就是原型链。**
+
+
 
 ## 1.原型链继承
 
@@ -56,7 +81,6 @@ console.log(child1.names); // ["kevin", "daisy", "yayu"]
 var child2 = new Child();
 
 console.log(child2.names); // ["kevin", "daisy", "yayu"]
-
 ```
 
 2.在创建 Child 的实例时，不能向Parent传参
@@ -322,14 +346,6 @@ prototype(Child, Parent);
 [《JavaScript深入之new的模拟实现》](https://github.com/mqyqingfeng/Blog/issues/13)
 
 [《JavaScript深入之创建对象》](https://github.com/mqyqingfeng/Blog/issues/15)
-
-## 深入系列
-
-JavaScript深入系列目录地址：[https://github.com/mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog)。
-
-JavaScript深入系列预计写十五篇左右，旨在帮大家捋顺JavaScript底层知识，重点讲解如原型、作用域、执行上下文、变量对象、this、闭包、按值传递、call、apply、bind、new、继承等难点概念。
-
-如果有错误或者不严谨的地方，请务必给予指正，十分感谢。如果喜欢或者有所启发，欢迎star，对作者也是一种鼓励。
 
 
 
