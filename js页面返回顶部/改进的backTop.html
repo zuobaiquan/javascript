@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		p{
+			height:500px;
+		}
+		a{
+			display: block;
+			width:50px;
+			height:50px;
+			line-height: 50px;
+			text-align: center;
+			background: #ddd;
+			position: fixed;
+			bottom: 0;
+			right:10px;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<p>这里的p标签为了撑开页面内容</p>
+	<p>这里的p标签为了撑开页面内容</p>
+	<p>这里的p标签为了撑开页面内容</p>
+	<p>这里的p标签为了撑开页面内容</p>
+	<p>这里的p标签为了撑开页面内容</p>
+	<p>这里的p标签为了撑开页面内容</p>
+	<p>这里的p标签为了撑开页面内容</p>
+	<p>这里的p标签为了撑开页面内容</p>
+	<p>这里的p标签为了撑开页面内容</p>
+	<a id="backtopBtn" href="javascript:;">按钮</a>
+</body>
+<script type="text/javascript">
+	var timer=null;
+	var btn=document.getElementById('backtopBtn');
+	var pageHeight=document.documentElement.clientHeight||document.body.clientHeight||window.innerHeight;
+	//触发屏幕滚动
+	window.onscroll=function(){
+		console.log("屏幕滚动");
+		var backTop=document.body.scrollTop;
+		if(backTop>=pageHeight){
+			btn.style.display="block";
+		}
+		else{
+			btn.style.display="none";
+		}
+	}
+	console.log(btn);
+	btn.addEventListener("click",function(){
+		timer=setInterval(function(){
+			var backtopValue=document.body.scrollTop;
+			var speed=backtopValue/5;
+			document.body.scrollTop-=speed;
+			if(backtopValue==0){
+				clearInterval(timer);
+			}
+		},50);
+		
+	},false);
+</script>
+</html>
