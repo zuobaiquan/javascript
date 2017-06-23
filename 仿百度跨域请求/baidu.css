@@ -1,0 +1,47 @@
+body,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,th,td,p,blockquote,pre,form,fieldset,legend,input,button,textarea,hr{margin:0;padding:0}
+body,button,input,select,textarea{ font:12px/1.5 "ËÎÌו",arial, verdana, sans-serif}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+li{list-style:none}
+fieldset,img{border:0}
+table{border-collapse:collapse;border-spacing:0}
+button,input,select,textarea{font-size:100%}
+legend{color:#000}
+small{font-size:12px}
+hr{border:none;height:1px}
+a{text-decoration:none}
+a:hover{text-decoration:none}
+.cle:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.cle{ display:inline-block}
+.cle{ display:block}
+.clear {clear: both;}
+
+
+.header ul{position: absolute;right: 0;top: 0;margin: 20px 5px 0 0;font-size: 13px;}
+.header ul li{float:left;padding-left: 20px;font-size: 13px;}
+.header .mnav{color: #333;font-weight: bold;text-decoration: underline;}
+.header .dl,.header .sz{color: #333;text-decoration: underline;}
+.header .more{background-color: #38f;color: #fff;padding:4px 3px;margin-left: 8px;margin-right: 6px}
+.header ul li:not(:last-child) a:hover{color: #00c}
+
+.main{position: absolute;top: 16%;left: 36%;}
+.main .logo{text-align: center;}
+.main .sousuo{margin: 22px auto;}
+.main .sousuo .inpt{width: 539px;border: 1px solid #b6b6b6;height: 34px;display: inline-block;position: relative}
+.inpt input{width: 500px;height: 22px;margin: 6px 0 0 7px;border: 0;outline: 0;font-size: 16px}
+.inpt .inpt_pic{position: absolute;right: 11px;top: 50%;margin-top: -8px;width: 18px;height: 16px;background:
+url("images/soutu_icons_6eead741.png")no-repeat 0 0;cursor: pointer}
+.sousuo .btn{display: inline-block;background: #3388ff;width:100px;height: 36px;line-height: 36px;text-align: center;
+cursor: pointer;vertical-align: top;-webkit-transition: all 0.3s}
+.btn a{font-size: 15px;color: #fff;}
+.btn:hover{background: #317bf3;box-shadow: 1px 1px 1px #ccc}
+.inpt_pic:hover{background-position: 0 -21px}
+
+.info{width: 539px;position: absolute;top: 35px;left:-1px;border: 1px solid #ccc;border-top: 0;background-color: white;}
+.info li{padding:0 8px;width: 522px;line-height: 25px;cursor: default;}
+.info li a{font-size: 15px;color:black}
+
+
+.curr{background-color: #ccc}
+
+dl{  border-bottom:1px dotted #000000}
+dt{font-weight: bold}

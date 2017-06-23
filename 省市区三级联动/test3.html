@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>城市选择的三种实现</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div>
+
+<div>
+    <fieldset>
+        <legend>方法三：按字母顺序选中城市</legend>
+        <label for="addr-show03">您选择的是：
+            <input type="text" id="addr-show03">
+        </label>
+        <div id="data-wrap">
+            <ul id="data-order">
+                <li value='0'>热门</li>
+                <li value='1'>ABCD</li>
+                <li value='2'>EFGH</li>
+                <li value='3'>JKLM</li>
+                <li value='4'>NPQR</li>
+                <li value='5'>STWX</li>
+                <li value='6'>YZ</li>
+            </ul>
+            <div id="data-show"></div>
+        </div>
+    </fieldset>
+</div>
+<script src="city02.js"></script>
+<script src="method03.js"></script>
+</body>
+</html>

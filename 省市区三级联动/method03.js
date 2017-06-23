@@ -1,6 +1,8 @@
 //****************针对第三种方式的具体js实现部分******************//
 //****************所使用的数据是city02.js******************//
-
+function $(str) {
+    return document.getElementById(str);
+}
 var addrShow03 = $('addr-show03');
 var dataOrder = $('data-order').querySelectorAll('li');
 var dataShow = $('data-show');

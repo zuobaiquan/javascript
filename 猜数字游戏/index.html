@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#container {
+            margin: 0 auto;
+            width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: rgba(156, 226, 239, 0.88);
+        }
+	</style>
+</head>
+<body>
+	<div id="container">
+    <h2>Number guessing game</h2>
+    <p>我们将生成一个1到100的随机整数，你可以猜10次或者更少，
+        我们会及时告诉你猜的答案是高了还是低了!</p>
+    <div>
+        <label>输入你的猜测：<input type="text" id="guess-number"></label>
+        <button id="btn">确认</button>
+    </div>
+    <div id="tips">
+        <p class="gus-log"></p>
+        <p class="gus-result"></p>
+        <p class="gus-low-hi"></p>
+    </div>
+</div>
+
+</body>
+<script>
+    /*生成一个随机数*/
+    var ranNum = Math.ceil(Math.random() * 100);
+    /*console.log(ranNum);*/
+    var gusIpt = document.getElementById('guess-number');
+    var btn = document.getElementById('btn');
+    var tips = document.getElementById('tips');
+    var gusLog = document.querySelector('.gus-log');
+    var gusRes = document.querySelector('.gus-result');
+    var gusLowHi = document.querySelector('.gus-low-hi');
+    var gusCount = 1;
+    var newBtn;
+    /*输入答案的正误判断*/
+    function guessCheck() {
+        var gusNum = Number(gusIpt.value);
+        if (isNaN(gusNum)) {
+            alert('请输入数字哦！');
+            gusIpt.value = '';
+            return;
+        }
+        if (gusCount == 1) {
+            gusLog.textContent = '猜测记录: ' + gusNum + ' ';
+        } else {
+            gusLog.textContent += gusNum + ' ';
+        }
+        if (gusCount < 10) {
+            if (gusNum === ranNum) {
+                gusRes.textContent = '恭喜你，猜对了！';
+                gusRes.style.backgroundColor = 'green';
+                btn.disabled = true;
+                gusIpt.disabled = true;
+                gusLowHi.textContent = '正确答案是' + gusNum;
+                /*重新开始游戏的按钮*/
+                newGame();
+            } else if (gusNum < ranNum) {
+                gusRes.textContent = '对不起，猜错了，继续加油~';
+                gusRes.style.backgroundColor = 'red';
+                gusLowHi.textContent = '太低了哦！';
+            } else {
+                gusRes.textContent = '对不起，猜错了，继续加油~';
+                gusRes.style.backgroundColor = 'red';
+                gusLowHi.textContent = '太高了哦！';
+            }
+        } else {
+            gusRes.textContent = '!!!超过次数，游戏结束!!!'
+            gusLowHi.textContent = '';
+            btn.disabled = true;
+            gusIpt.disabled = true;
+            /*重新开始游戏的按钮*/
+            newGame();
+        }
+        /*console.log(gusCount + ':' + gusNum);*/
+        gusCount++;
+        gusIpt.value = '';
+        gusIpt.focus();
+    }
+    /*重新开始一局游戏*/
+    function newGame() {
+        newBtn = document.createElement('button');
+        newBtn.innerText = '重新开始！';
+        tips.appendChild(newBtn);
+        newBtn.onclick = function () {
+            ranNum = Math.ceil(Math.random() * 100);
+            /*console.log(ranNum);*/
+            btn.disabled = false;
+            gusIpt.disabled = false;
+            gusIpt.value = '';
+            gusIpt.focus();
+            gusLog.textContent = ' ';
+            gusCount = 1;
+            gusRes.textContent = ' ';
+            gusLowHi.textContent = ' ';
+            newBtn.parentNode.removeChild(newBtn);
+        }
+    }
+    btn.addEventListener('click', guessCheck);
+</script>
+</html>

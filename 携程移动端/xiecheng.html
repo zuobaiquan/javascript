@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>携程网</title>
+    <link rel="stylesheet" href="css/xc.css"  >
+    <script src="js/TouchSlide.1.1.js"></script>
+</head>
+<body>
+  <header>
+      <div class="search">
+          <span>搜索:目的地/酒店/景点/航班号</span>
+      </div>
+      <a href="#"><span>我的</span></a>
+  </header>
+  <!-- 本例主要代码 Start ================================ -->
+  <div id="focus" class="focus">
+      <div class="hd">
+          <ul></ul>
+      </div>
+      <div class="bd">
+          <ul>
+              <li><a href="#"><img src="images/1.png" /></a></li>
+              <li><a href="#"><img src="images/2.png" /></a></li>
+              <li><a href="#"><img src="images/3.png" /></a></li>
+          </ul>
+      </div>
+  </div>
+  <script type="text/javascript">
+      TouchSlide({
+          slideCell:"#focus",
+          titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+          mainCell:".bd ul",
+          effect:"leftLoop",
+          autoPlay:true,//自动播放
+          autoPage:true //自动分页
+      });
+  </script>
+  <!-- 本例主要代码 End ================================ -->
+<nav>
+    <div class="row row_jd">
+        <div class="row1"><a href="#">酒店</a></div>
+        <div class="row2 col">
+            <a href="#">海外酒店</a>
+            <a href="#">特价酒店</a>
+        </div>
+        <div class="row3 col">
+            <a href="#">团购</a>
+            <a href="#">民宿·客栈</a>
+        </div>
+    </div>
+
+
+    <div class="row row_fj">
+        <div class="row1"><a href="#">机票</a></div>
+        <div class="row2 col">
+            <a href="#">火车票</a>
+            <a href="#">国际机票</a>
+        </div>
+        <div class="row3 col">
+            <a href="#">汽车票·船票</a>
+            <a href="#">自驾·专车</a>
+        </div>
+    </div>
+    <div class="row row_ly">
+        <div class="row1"><a href="#">旅游</a></div>
+        <div class="row2 col">
+            <a href="#"><em>攻略·身边</em></a>
+            <a href="#"><em>周边游</em></a>
+        </div>
+        <div class="row3 col">
+            <a href="#">游轮</a>
+            <a href="#">定制·包团</a>
+        </div>
+    </div>
+    <div class="row row_qt">
+        <div class="row2 col">
+            <a href="#">景点·玩乐</a>
+            <a href="#">礼品卡</a>
+        </div>
+        <div class="row2 col">
+            <a href="#">美食</a>
+            <a href="#">出境WiFi</a>
+        </div>
+        <div class="row3 col">
+            <a href="#">全球购·换汇</a>
+            <a href="#">保险·签证</a>
+        </div>
+    </div>
+
+
+</nav>
+
+<div class="nav2">
+<div class="row2_1 row21">
+    <div class="col2_1"><a href="#">自由行</a></div>
+    <div class="col2_1"><a href="#">主题游</a></div>
+    <div class="col2_1"><a href="#">一日游</a></div>
+    <div class="col2_1"><a href="#">顶级游</a></div>
+</div>
+    <div class="row2_1 row22">
+        <div class="col2_1"><a href="#">自由行</a></div>
+        <div class="col2_1"><a href="#">主题游</a></div>
+        <div class="col2_1"><a href="#">一日游</a></div>
+        <div class="col2_1"><a href="#">顶级游</a></div>
+    </div>
+
+</div>
+
+<div class="selling">
+    <div class="sell_head">
+        <h2 class="sell_title">"特卖会"</h2>
+        <a class="sell_head_more " href="#">更多特惠秒杀</a>
+    </div>
+    <div class="sell_hot">
+        <img src="images/selling1.png" width="100%" height="165">
+        <div class="sell_info">
+            <p>普吉岛6日5晚自由行·[惠购]精选特惠航班/不红眼/特卖汇</p>
+            <span class="sell_tag">仅剩6席</span>
+            <span class="sell_price">¥<b>2066</b>起</span>
+        </div>
+    </div>
+    <div class="sell_item">
+        <ul>
+            <li>
+                <a href="#"><img src="images/item1.png" alt=""></a>
+                <dl class="sell_item_title">
+                    <dt>海外精选</dt>
+                    <dd>
+                        <span class="highlight">百元</span>出境游
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <a href="#"><img src="images/item2.png" alt=""></a>
+                <dl class="sell_item_title">
+                    <dt>周边玩乐</dt>
+                    <dd>
+                        <span class="highlight">十元</span>度周末
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+
+    </div>
+</div>
+<div class="hot_act">
+    <div class="sell_head">
+        <h2 class="sell_title">"热门活动"</h2>
+        <a class="sell_head_more " href="#">获取更多福利</a>
+    </div>
+    <div class="act_bd">
+        <ul>
+            <li><a href="#"><img src="images/hot1.png" alt=""></a> </li>
+            <li><a href="#"><img src="images/hot2.png" alt=""></a> </li>
+            <li><a href="#"><img src="images/hot3.png" alt=""></a> </li>
+        </ul>
+        <ul>
+            <li><a href="#"><img src="images/hot2.png" alt=""></a> </li>
+            <li><a href="#"><img src="images/hot3.png" alt=""></a> </li>
+        </ul>
+    </div>
+</div>
+<footer class="tool_box">
+    <div class="tool">
+        <a href="#">电话预定</a>
+        <a href="#">下载客户端</a>
+        <a href="#">我的</a>
+    </div>
+    <div class="tool_ver">
+        <a href="#">网站地图 |</a>
+        <a href="#">ENGLISH |</a>
+        <a href="#">电脑版</a>
+    </div>
+    <p>©2016携程旅游</p>
+</footer>
+</body>
+</html>
