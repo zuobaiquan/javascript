@@ -6,7 +6,20 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title></title>
-    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=e3ZohdqyB0RL98hFOiC29xqh"></script>
+    
+</head>
+<body class="easyui-layout">
+     <div class="Ditumap">  
+        <div style="margin-bottom:10px;">
+            <input id="searchplace" style="width: 550px;" class="easyui-textbox-simple" placeholder="输入搜索关键字" />
+            <a id="s_p_search_btn" href="#" class="easyui-linkbutton" style="width: 80px;" iconcls="icon-search">搜索</a>
+        </div>
+        <div id="searchlist" style="width: 350px; height: 460px; margin-right:10px; float:left;"></div>
+        <div style="width:600px;height:460px;border:none; float:left;" id="BaiduDitu"></div>
+        <div style="clear:both;"></div>
+    </div>
+</body>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=e3ZohdqyB0RL98hFOiC29xqh"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
             function initMap(){
@@ -60,16 +73,4 @@
                 });
             }
         </script>
-</head>
-<body class="easyui-layout">
-     <div class="Ditumap">  
-        <div style="margin-bottom:10px;">
-            <input id="searchplace" style="width: 550px;" class="easyui-textbox-simple" placeholder="输入搜索关键字" />
-            <a id="s_p_search_btn" href="#" class="easyui-linkbutton" style="width: 80px;" iconcls="icon-search">搜索</a>
-        </div>
-        <div id="searchlist" style="width: 350px; height: 460px; margin-right:10px; float:left;"></div>
-        <div style="width:600px;height:460px;border:none; float:left;" id="BaiduDitu"></div>
-        <div style="clear:both;"></div>
-    </div>
-</body>
 </html>
