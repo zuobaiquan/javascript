@@ -1,0 +1,64 @@
+*{margin: 0;padding: 0;}
+
+.box{
+	width: 310px;
+	height: 250px;
+	margin: 100px auto;
+	overflow: hidden;
+	position: relative;
+}
+.content{
+	width: 310px;
+	height: 220px;
+	overflow: hidden;
+	position: relative;
+}
+.content div{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.content div img{
+	width: 310px;
+	height: 220px;
+}
+
+
+.control{
+	width: 310px;
+	height: 30px;
+	background-color: #333;
+	text-align: center;
+}
+.control-bar{
+	display: inline-block;
+	width: 24px;
+	height: 5px;
+	background: url(img/icon.png) no-repeat -24px -790px ;
+	margin: 12px 2px 0 2px;
+	cursor: pointer;
+}
+.control .control-bar:hover{
+	background: url('img/icon.png') no-repeat -24px -770px;
+}
+
+.control .control-bar.current{
+	background: url('img/icon.png') no-repeat 0 -770px;
+}
+#pre, #next{
+	position: absolute;
+	top: 50%;
+	margin-top: -35px;
+	width: 20px;
+	height: 34px;
+	background-color: pink;
+	cursor: pointer;
+}	
+#pre{
+	left: 3px;
+	background:url(img/icon.png) no-repeat 0 0;
+}
+#next{
+	right: 3px;
+	background:url(img/icon.png) no-repeat -9px -45px;
+}

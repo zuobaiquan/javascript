@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin: 0;}
+		.slider{
+			width: 800px;
+			height: 500px;
+			position: relative;
+			overflow: hidden;
+			margin: 30px auto;
+		}
+		.slider img{
+			width: 800px;
+			height: 500px;
+		}
+		
+		.slider .content{
+	
+		}
+		.slider .content ul{
+			width: 10000px;
+			list-style: none;
+			position: absolute;
+			left:0px;
+		}
+		.slider .content li{
+			float: left;
+		}
+
+
+		.slider .control{
+			position: absolute;
+			width: 100%;	
+			z-index: 10;
+			bottom: 50px;
+			left: 0;
+			text-align: center;
+		}
+		.slider .control span{
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			line-height: 20px;
+			text-align: center;
+			font-size: 14px;
+			background-color: #fff;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+		.slider .control span.current{
+			background-color: red;
+		}
+	</style>
+
+	<script>
+
+		//封装移动函数
+		function animate(element,target){
+			clearInterval(element.animateTimer);
+			var left = element.offsetLeft;
+			var step = (target - left) / 10;
+
+			element.animateTimer = setInterval(function(){
+				left += step;
+				element.style.left = left + 'px';
+				if(Math.abs(target - left) <= Math.abs(step)){
+					clearInterval(element.animateTimer);
+					element.style.left = target + 'px';
+				}
+			},100);
+		}
+
+
+		window.onload =function(){
+			var ul = document.getElementsByTagName('ul')[0];
+			var spanArr = document.getElementsByTagName('span');
+
+			//4.最后一张显示后，克隆第一张图片继续显示第一张
+			ul.appendChild(ul.children[0].cloneNode(true));
+
+			var ulLeft = ul.offsetLeft;
+			console.log(ulLeft);
+			var ulIndex = 0;  //默认第一张图片下标
+			// console.log(ulLeft);
+			//开启
+			var autoPlayTimer = setInterval(function(){			
+				//4.2 从最后一张滚回到第一张(ulIndex == 5)之后  需重置回第一张状态
+				if(ulIndex == 5){
+					ulIndex = 0;
+					ul.style.left = '0';
+					ulLeft = 0;
+				}
+
+				ulLeft -= 800;
+				// console.log(ulLeft);
+				animate(ul, ulLeft);
+
+				ulIndex++;
+
+
+				for(var i = 0; i< spanArr.length; i++){
+					spanArr[i].className = '';
+				}
+				//4.3改变页面  第五张图片结束后ulIndex是4 
+				//第六张图片即第一张图片的ulIndex是5  所以求ulIndex % 5 恢复ulIndex为0 
+				spanArr[ulIndex % 5].className = 'current';
+			},3000);
+
+
+			//第二大步  给小圆点span添加点击事件
+			for(var i = 0; i< spanArr.length; i++){
+				var span = spanArr[i];
+
+				span.index = i;
+				span.onclick = function(){
+
+					//实现点击span后图片移动
+					var targetLeft = -800 * this.index; //0 - 4
+					//点击后自动滚动到 当前圆点对应的图片的位置  即左移800*下标
+					animate(ul, targetLeft);
+					//记录此时的ulLeft ulIndex 为了继续从当前点击图片向下一张图片移动
+					ulLeft = targetLeft;
+					ulIndex = this.index;
+
+					//切换当前span选中样式
+					for(var j = 0; j<spanArr.length; j++){
+						spanArr[j].className = '';
+					}
+					this.className = 'current';
+				}
+			}
+
+
+		}
+	</script>
+</head>
+<body>
+	<div class="slider">
+		<div class="control">
+			<span class="current">1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+		</div>
+		<div class="content" id="imag-list">
+			<ul >
+				<li><img src="images/1.jpg" alt="" /></li>
+				<li><img src="images/5.jpg" alt="" /></li>
+				<li><img src="images/4.jpg" alt="" /></li>
+				<li><img src="images/3.jpg" alt="" /></li>
+				<li><img src="images/2.jpg" alt="" /></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

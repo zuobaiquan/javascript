@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		
+		*{margin: 0;padding: 0;}
+		
+		.slider{
+			margin: 100px auto;
+			width: 640px;
+			height: 400px;
+			position: relative;
+		}
+		.slider .control{
+			position: absolute;
+			width: 640px;
+			height: 20px;
+			left: 0;
+			bottom: 30px;
+		}
+
+		.slider .control ul{
+			list-style: none;
+			width: 150px;
+			margin: 0 auto;
+		}
+
+		.slider .control li{
+			width: 20px;
+			height: 20px;
+			margin: 0 5px;
+			float: left;
+			border-radius: 50%;
+			background-color: #fff;
+			cursor: pointer;
+		}
+		.slider .control li.active{
+			background-color: red;
+		}
+
+		/*默认设置不显示其他图片*/
+		.slider .content img{
+			width: 640px;
+			height: 400px;
+			display: none;
+		}
+		/*只显示第一张图片*/
+		.slider .content img.active{
+			display: block;
+		}
+	</style>
+
+	<script type="text/javascript">
+		
+		window.onload = function () {
+			//根据图片数改变小圆点数
+			//1获得图片数
+			var content = document.getElementsByClassName("content")[0];
+			var images = content.getElementsByTagName("img"); //数组  所有图片
+			//图片数
+			var imageCount = images.length;
+	
+			//根据图片数创建小圆点数,添加到ul中
+			//遍历图片数
+			for(var i = 0; i < imageCount; i++){
+				//1创建小白点
+				var li = document.createElement("li");
+
+				li.index = i;
+				//3默认的第一个选中
+				if (i == 0) {
+					li.className += 'active';
+				}
+				//2添加到ul中
+				var control = document.getElementsByClassName("control")[0];
+				var ul = control.getElementsByTagName("ul")[0];
+				ul.appendChild(li);
+
+				var select = 0;
+				li.onclick = function(){
+					select = this.index;
+					changImage(this.index);
+				}
+
+				li.onmousemove = function () {
+					changImage(this.index);
+				}
+
+				li.onmouseout =function () {
+					changImage(select);
+				}
+
+			
+				//4设置ul宽度 保证居中
+				ul.style.width = (imageCount*30)+ 'px';	
+			}
+		}
+
+		//定义一个改变图片函数
+		function changImage(i) {
+			var index = i;
+			var ul = document.getElementsByTagName("ul")[0];
+			//获取所有的images
+			var images = document.getElementsByTagName("img"); //数组
+			//获取所有的li
+			var lis = ul.getElementsByTagName("li");
+			for(var j = 0; j < lis.length; j++){
+				var li = lis[j];
+				 var img = images[j];
+				 //清除li 和 img 默认的active (img的active表示显示这个图片)
+				 li.className = '';
+				 img.className = '';
+			}
+			//设置当前的active属性
+			
+			lis[index].className = 'active';
+			images[index].className = 'active';
+		}
+	</script>
+
+</head>
+<body>
+	<!-- 轮播图片 -->
+	<div class="slider">
+		<!-- 小圆点 -->
+		<div class="control">
+			<!-- 根据图片数量添加小圆点 -->
+			<ul>
+				
+			</ul>
+		</div>
+		<!-- 图片显示 -->
+		<div class="content">
+			<img src="./2.jpg" alt="" class="active" />
+			<img src="./66.jpg" alt="" />
+			<img src="./33.jpg" alt="" />
+			<img src="./44.jpg" alt="" />
+			<img src="./55.jpg" alt="" />
+		</div>
+	</div>
+</body>
+</html>
