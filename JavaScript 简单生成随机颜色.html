@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style media="screen">
+  *{ margin: 0;padding: 0; }
+  body{ transition: .7s }
+</style>
+<script type="text/javascript">
+  function color(){
+    var colors = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' ];
+    var c = '';
+    for(var i=0; i<6; i++){
+      var n = parseInt( Math.random()*15 );
+      c += colors[n];
+    }
+    return '#' + c;
+  }
+  document.body.style.background = color();
+</script>
+</head>
+<body>
+
+</body>
+</html>
