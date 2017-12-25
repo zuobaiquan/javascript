@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>圆环进度</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	text-align: center;
+}
+.loading {
+	margin: 10px auto;
+	width: 150px;
+	height: 150px;
+	position: relative;
+	background-color: #FFF;
+	background: #EAEEF2;
+	border-radius: 50%;
+}
+.progress {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 130px;
+	height: 130px;
+	transform: translate(-50%, -50%);
+	color: red;
+	line-height: 130px;
+	text-align: center;
+	background-color: #FFF;
+	border-radius: 50%;
+}
+.left,
+.right {
+	float: left;
+	width: 50%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.left span,
+.right span {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: red;
+	transition: all 0.4s;
+}
+.left span {
+	border-radius: 150px 0 0 150px;
+	transform-origin: right;
+}
+.right span {
+	border-radius: 0 150px 150px 0;
+	transform-origin: left;
+}
+.btns {
+	height: 30px;
+	margin: 0 auto;
+	display: inline-block;
+}
+.btns button {
+	height: 100%;
+	width: 30px;
+	border: 1px solid #CCC;
+	background-color: #FFF;
+	cursor: pointer;
+	outline: none;
+}
+.btns input {
+	height: 30px;
+	border: 1px solid #CCC;
+	box-sizing: border-box;
+	outline: none;
+	padding: 0 10px;
+	width: 80px;
+	text-align: center;
+	border-left: none;
+	border-right: none;
+}
+.time {
+	width: 600px;
+	margin: 50px auto;
+}
+.time .loading {
+	margin: 0;
+	display: inline-block;
+	margin-right: 20px;
+	font-size: 30px;
+}
+</style>
+</head>
+
+<body>
+<div class="loading">
+	<div class="left"><span></span></div>
+	<div class="right"><span></span></div>
+	<div class="progress"><span>0</span>%</div>
+</div>
+<div class="btns">
+	<button class="reduce" onclick="reduce()">-</button><input type="text" id="num" value="0" /><button class="add" onclick="add()">+</button>
+</div>
+<div class="time">
+	<div class="loading">
+		<div class="left"><span></span></div>
+		<div class="right"><span></span></div>
+		<div class="progress"><span>0</span></div>
+	</div>
+	<div class="loading">
+		<div class="left"><span></span></div>
+		<div class="right"><span></span></div>
+		<div class="progress"><span>0</span></div>
+	</div>
+	<div class="loading">
+		<div class="left"><span></span></div>
+		<div class="right"><span></span></div>
+		<div class="progress"><span>0</span></div>
+	</div>
+</div>
+</body>
+<script>
+function ring() {};
+ring.prototype = {
+	init: function (option) {
+		if (typeof option == "undefined") {
+			option = {};
+		}
+		this.Dom = option.Dom || document.getElementsByClassName("loading")[0];
+		this.Percentage = Number(option.Percentage) || 0;
+		this.Total = Number(option.Total) || 100;
+		this.Range = Number(option.Range) || 10;
+		this.Percentage = this.Percentage > this.Total ? this.Total : this.Percentage;
+		this.Range = this.Range > this.Total ? this.Total : this.Range;
+		this.set();
+	},
+	add: function () {
+		this.Percentage += this.Range;
+		this.Percentage = this.Percentage > this.Total ? this.Total : this.Percentage;
+		this.set();
+	},
+	red: function () {
+		this.Percentage -= this.Range;
+		this.Percentage = this.Percentage < 0 ? 0 : this.Percentage;
+		this.set();
+	},
+	set: function (Percentage) {
+		this.Percentage = Number(Percentage) || this.Percentage;
+		this.lef = this.Percentage > (this.Total / 2) ? this.Percentage - (this.Total / 2) : 0;
+		this.rig = this.Percentage > (this.Total / 2) ? (this.Total / 2) : this.Percentage;
+		this.getdom("left").style.transform = "rotateZ(" + this.setdeg(this.lef) + "deg)";
+		this.getdom("right").style.transform = "rotateZ(" + this.setdeg(this.rig) + "deg)";
+		this.getdom("progress").innerText = this.Percentage;
+	},
+	getdom: function (name) {
+		return (this.Dom).getElementsByClassName(name)[0].getElementsByTagName('span')[0];
+	},
+	setdeg: function (deg) {
+		return 360 / this.Total * deg - 180;
+	}
+}
+var rin = new ring();
+rin.init();
+var val = document.getElementById("num");
+val.onchange = function () {
+	val.value = Number(val.value) > 100 ? 100 : Number(val.value);
+	rin.set(val.value);
+}
+function add() {
+	val.value = Number(val.value) + 10 > 100 ? 100 : Number(val.value) + 10;
+	rin.add();
+}
+function reduce() {
+	val.value = Number(val.value) - 10 < 0 ? 0 : Number(val.value) - 10;
+	rin.red();
+}
+var time1 = new ring();
+var time2 = new ring();
+var time3 = new ring();
+time1.init({
+	Dom: document.getElementsByClassName("loading")[1],
+	Total: 24
+});
+time2.init({
+	Dom: document.getElementsByClassName("loading")[2],
+	Total: 60
+});
+time3.init({
+	Dom: document.getElementsByClassName("loading")[3],
+	Total: 60
+});
+setInterval(function () {
+	var date = new Date(),
+		H = date.getHours(),
+		M = date.getMinutes(),
+		S = date.getSeconds();
+	time1.set(H);
+	time2.set(M);
+	time3.set(S);
+}, 30);
+</script>
+
+</html>
