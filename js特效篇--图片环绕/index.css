@@ -1,0 +1,146 @@
+* { margin: 0;padding: 0;}
+body,html{ font-size: 14px; height: 100%;}
+.wrap {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    perspective: 1800px;
+}
+.photo {
+    width: 260px;
+    height: 320px;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.01);
+    transition: all 0.5s;
+    left: 50%;
+    top: 50%;
+    margin: -160px 0 0 -130px;
+}
+.photo .side {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+}
+.photo .side-front {
+    transform: rotateY(0deg);
+}
+.photo .side-front .imgs {
+    width: 100%;
+    height: 250px;
+    line-height: 250px;
+    overflow: hidden;
+}
+.photo .side-front .imgs img {
+    width: 100%;
+}
+.photo .side-front .caption {
+    text-align: center;
+    font-size: 16px;
+    line-height: 50px;
+}
+.side-back {
+    transform: rotateY(180deg);
+}
+.side-back .desc {
+    color: #666;
+    line-height: 1.5em;
+    font-size: 14px;
+}
+/*当前海报选中样式*/
+.photo-center {
+    left: 50%;
+    top: 50%;
+    margin: -160px 0 0 -130px;
+    z-index: 999;
+}
+.photo-wrap {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 0.5s;
+    transform-origin: 0;
+}
+.photo-front .photo-wrap {
+    transform: rotateY(0deg) translate(0px, 0px);
+}
+.photo-back .photo-wrap {
+    transform: rotateY(180deg) translate(-260px, 0px);
+}
+.nav {
+    width: 80%;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    left: 10%;
+    bottom: 20px;
+    z-index: 10000;
+    background: #fff;
+    text-align: center;
+}
+.i {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #aaa;
+    cursor: pointer;
+    transform: scale(0.5);
+}
+.nav .i_current {
+    transform: scale(1);
+    background: #000;
+}
+.nav .i_back {
+    transform: scale(1);
+    background: #0E8EE7;
+}
+.btnbox {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    z-index: 10000;
+}
+.btnbox button {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    background: #fff;
+    border: none;
+    outline: none;
+    color: #0E8EE7;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.btnbox button.show {
+    color: #fff;
+    background: #0E8EE7;
+}
+.pox {
+    height: 40px;
+    font-size: 16px;
+    background: #fff;
+    margin-top: 10px;
+    line-height: 40px;
+    border-radius: 4px;
+    position: relative;
+}
+.pox label {
+    margin-left: 20px;
+}
+.pox input[type="range"] {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+}
