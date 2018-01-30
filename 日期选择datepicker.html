@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>datepicker</title>
+	<style type="text/css">
+		body {
+			margin:0;
+			padding:0;
+		}
+		.date-input {
+			width: 270px;
+			margin-left:100px;
+			margin-top:100px;
+		}
+		.ui-datepicker-wrapper {
+			box-sizing: border-box;
+			position: absolute;
+			width: 270px;
+			padding:0 10px;
+			padding-bottom:20px;
+		    color: #97a8be;
+	        line-height: 20px;
+		    box-shadow: 0 2px 6px #ccc;
+		    background: #fff;
+		    margin: 5px 0;
+		  	-webkit-user-select: none;
+		  	user-select: none;
+		}
+		.ui-datepicker-wrapper .disabled {
+		    background-color: #f4f4f4;
+		    cursor: not-allowed;
+		    color: #ccc;
+		}
+
+		.ui-datepicker-wrapper .current {
+		    background-color: #20a0ff!important;
+		    color: #fff;
+		}
+
+		.ui-datepicker-header {
+			padding-top: 5px;
+			display:flex;
+		  	align-items:center;
+		  	justify-content: space-between;
+
+		}
+		.ui-datepicker-header >* {
+			vertical-align: middle;
+			transition: all .5s;
+		}
+		.ui-datepicker-header >*:hover {
+			color:#20a0ff;
+		}
+		.ui-datepicker-header .ui-datepicker-date {
+			font-size:14px;
+		}
+		.ui-datepicker-btns {
+		  	margin-top: -8px;
+		}
+		.ui-datepicker-btn {
+		    color: #97a8be;
+			font-size: 36px;
+			line-height: 36px;
+		    border: 0;
+		    background: transparent;
+		    cursor: pointer;
+		    outline: none;
+		}
+		.ui-datepicker-btn:hover {
+			color: #20a0ff;
+		}
+
+		.ui-datepicker-content {
+			margin-top: 10px;
+		}
+		.ui-datepicker-content table {
+			width: 100%;
+			text-align: center;
+			font-size:12px;
+		}
+
+		.ui-datepicker-content table tr {
+			line-height: 32px;
+		}
+		.ui-datepicker-content table tbody .available:hover {
+			background: #e4e8f1;
+		}
+
+
+	</style>
+</head>
+<body>
+	<input type="text" name="" class="date-input">
+</body>
+</html>
+<script type="text/javascript">
+	var input = document.querySelector('.date-input');
+
+
+
+	datepicker(input)
+	function datepicker (self) {
+
+		var dateObj = "";
+
+		self.onclick = function(e){
+			e.stopPropagation();
+			if (dateObj) {
+				dateObj.style.display = "block";
+				return
+			}
+			datepickerComponents();
+			dateObj = document.querySelector('.ui-datepicker-wrapper');
+		};
+
+		document.addEventListener('click',function(e){
+			console.log(e)
+			var minT = dateObj.offsetTop,
+				maxT = dateObj.offsetTop + dateObj.offsetHeight,
+				minL = dateObj.offsetLeft,
+				maxL = dateObj.offsetLeft + dateObj.offsetWidth;
+
+			if (e.target != self && e.pageX > minL && e.pageX <= maxL && e.pageY > minT && e.pageY <= maxT) {
+				console.log('在日历内')
+			}else{
+				dateObj.style.display = "none";
+			}
+		})
+
+
+		function  datepickerComponents(){
+			var datepicker = {};
+			var dateTableHtml = '<div class="ui-datepicker-header">'+
+					'<div class="ui-datepicker-btns">'+
+						'<span class="ui-datepicker-double ui-datepicker-btn ui-datepicker-prev-year-btn">&#171</span>'+
+						'<span class="ui-datepicker-single ui-datepicker-btn ui-datepicker-prev-month-btn">&#139</span>'+
+					'</div>'+
+					'<span class="ui-datepicker-date">'+
+					'<span class="ui-datepicker-date-show">2017年 8月</span>'+
+					'</span>'+
+					'<div class="ui-datepicker-btns">'+
+						'<span class="ui-datepicker-single ui-datepicker-btn ui-datepicker-next-month-btn">&#155</span>'+
+						'<span class="ui-datepicker-double ui-datepicker-btn ui-datepicker-next-year-btn">&#187</span>'+
+					'</div>'+
+				'</div>'+
+				'<div class="ui-datepicker-content">'+
+					'<table cellspacing="0" cellpadding="0">'+
+						'<thead>'+
+							'<tr>'+
+								'<th>日</th>'+
+								'<th>一</th>'+
+								'<th>二</th>'+
+								'<th>三</th>'+
+								'<th>四</th>'+
+								'<th>五</th>'+
+								'<th>六</th>'+
+							'</tr>'+
+						'</thead>'+
+						'<tbody class="ui-datepicker-tbody">'+
+					'</tbody>'+
+					'</table>'+
+				'</div>';
+
+			var selfX = self.offsetLeft,
+				selfY = self.offsetTop,
+				selfH = self.offsetHeight;
+
+			var oDateTable = document.createElement('div');
+			oDateTable.className = 'ui-datepicker-wrapper';
+			oDateTable.innerHTML = dateTableHtml;
+			oDateTable.style.top = selfY + selfH + 'px';
+			oDateTable.style.left = selfX + 'px';
+
+			document.body.appendChild(oDateTable)
+			var currYear = new Date().getFullYear(),
+				currMonth = new Date().getMonth() + 1,
+				nowYear = new Date().getFullYear(),
+				nowMonth = new Date().getMonth() + 1,
+				nowDay = new Date().getDate();
+			datepicker.getMonthDate = function (year, month) {
+				var current = new Date();
+
+				year = year || currYear;
+				month = month || currMonth;
+
+				var firstWeekDay = new Date(year, month - 1, 1).getDay(); // 获取本月第一天是星期几， 求出上月多出几天在本次出现
+
+				var lastDayOfLastMonth = new Date(year, month - 1, 0).getDate(); //获取上月最后一天的日期
+
+				var lastDay = new Date(year, month, 0).getDate(); //本月最后一天
+
+				var result = []; //盛放当月数据
+				for (var i = 0, len = 6*7; i < len; i ++) {
+					var dateCount = i - firstWeekDay,
+						day = dateCount + 1,
+						week = i%7,
+						thisMonth = month,
+						thisYear = year;
+
+					if (week === 0) week = 7;
+					if ( dateCount < 0) {
+						day = lastDayOfLastMonth + (dateCount + 1);
+						thisMonth = thisMonth - 1;
+					}else if (dateCount >= lastDay) {
+						day = dateCount - lastDay + 1;
+						thisMonth = thisMonth + 1;
+					}
+					if (thisMonth >= 13) {
+						thisMonth = 1;
+						thisYear += 1;
+					}
+					if (thisMonth <=0 ) {
+						thisMonth = 12;
+						thisYear -= 1;
+					}
+					result.push({
+						dateCount: dateCount,
+						day: day,
+						week: week,
+						month: thisMonth,
+						year: thisYear
+					})
+				}
+
+				return result;
+			}
+
+			var date = datepicker.getMonthDate();
+
+			var owrap = document.querySelector('.ui-datepicker-wrapper');
+			var oBody = document.querySelector('.ui-datepicker-tbody');
+			var oDateShow = document.querySelector('.ui-datepicker-date-show');
+			oBody.innerHTML =  createHtml(date);
+			oDateShow.innerHTML = currYear + '年 ' + currMonth + '月'
+
+			owrap.addEventListener('click', function(e){
+				var classStr = e.target.getAttribute('class');
+				if (!classStr) {
+					return;
+				}
+				if (classStr.indexOf('available') > -1) { //选择日期
+					var tds = document.querySelectorAll('td');
+
+					tds.forEach( function(v, i){
+						console.log(v)
+						if (v.className !== 'disabled') {
+							v.className = "available";
+						}
+					})
+					e.target.className = 'available current';
+
+					self.value = e.target.dataset.year + '-' + e.target.dataset.month + '-' + e.target.dataset.day
+					dateObj.style.display = "none";
+
+				}else if (classStr.indexOf('ui-datepicker-prev-month-btn') > -1) { //上一月按钮
+					currMonth --;
+					headerDateShow();
+					oBody.innerHTML =  createHtml(datepicker.getMonthDate(currYear, currMonth))
+				}else if (classStr.indexOf('ui-datepicker-prev-year-btn') > -1) { //上一年按钮
+					currYear --;
+					headerDateShow();
+					oBody.innerHTML =  createHtml(datepicker.getMonthDate(currYear, currMonth))
+				}else if (classStr.indexOf('ui-datepicker-next-month-btn') > -1) { //下一月按钮
+					currMonth ++;
+					headerDateShow();
+					oBody.innerHTML =  createHtml(datepicker.getMonthDate(currYear, currMonth))
+				}else if (classStr.indexOf('ui-datepicker-next-year-btn') > -1) { //下一年按钮
+					currYear ++;
+					headerDateShow();
+					oBody.innerHTML =  createHtml(datepicker.getMonthDate(currYear, currMonth))
+				}
+
+
+			})
+
+
+
+			function headerDateShow () {
+				if (currMonth > 12) {
+					currMonth = 1;
+					currYear ++;
+				}
+
+				if (currMonth < 1) {
+					currMonth = 12;
+					currYear --;
+				}
+				oDateShow.innerHTML = currYear + '年 ' + currMonth + '月';
+			}
+
+			function createHtml (date) {
+				var html = '';
+				console.log(date)
+				date.forEach( function (v, i) {
+					var disabled = true;
+					if (v.year > nowYear) {
+						disabled = false;
+					}else if(v.year == nowYear) {
+						if (v.month > nowMonth) {
+							disabled = false;
+						}else if (v.month == nowMonth) {
+
+							if (v.day >= nowDay) {
+								disabled = false;
+							}else{
+								disabled = true;
+							}
+						}else{
+							disabled = true;
+						}
+					}else{
+						disabled = true;
+					}
+					if (i%7 === 0) {
+						html += '<tr>'
+					}
+					
+					html += '<td class="'+(disabled ? "disabled":"available")+'" data-year="'+v.year+'" data-month="'+v.month+'" data-day="'+v.day+'">'+v.day+'</td>'
+					if (i%7 === 6) {
+						html += '</tr>'
+					}
+				})
+				return html;
+			}
+		}
+	}
+	
+
+	
+
+	
+</script>
