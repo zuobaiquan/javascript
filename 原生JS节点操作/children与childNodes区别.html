@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>children与childNodes区别</title>
+</head>
+<body>
+<ul id="ul1">
+	<li>
+		<span>我是文本</span>
+	</li>
+	<li></li>
+	<li></li>
+</ul>
+</body>
+<script type="text/javascript">
+window.onload=function(){
+    var oUl1=document.getElementById("ul1");
+    console.log("children.length",oUl1.children.length); // 3
+    console.log("childNodes.length",oUl1.childNodes.length); // 7
+    console.log("childNodes模拟children",myChildren(oUl1).length);  //3--childNodes模拟children
+    console.log("childNodes模拟children ==  ",myChildren2(oUl1).length);  //3--childNodes模拟children
+    for(var i=0; i<oUl1.children.length; i++){
+       oUl1.children[i].style.background='red';
+    }
+}
+
+//childNodes模拟children
+function myChildren(ele){
+	//获取所有的子元素(包括文本节点、元素节点、注释节点)；
+    var eleChild = ele.childNodes; 
+    var str = [];
+    //循环所有的文本节点，以便都能拿到；
+    for(var i = 0;i<eleChild.length;i++){
+    	//nodeType == 1 是元素节点(element)，2是属性节点(attr)，3是文本节点(text)，8是注释节点，9是文档(document)。
+        if(eleChild[i].nodeType == 1){
+        	//将得到的每一项子元素添加到数组的后面；
+            str.push(eleChild[i]);
+        }
+    }
+    return str;
+}
+
+//childNodes模拟children
+function myChildren2(ele){
+	//获取所有的子元素(包括文本节点、元素节点、注释节点)；
+    var eleChild = ele.childNodes; 
+    //循环所有的文本节点，以便都能拿到；
+    for(var i = 0;i<eleChild.length;i++){
+        //console.log(eleChild[i].nodeName);	//#text  Li
+        if(eleChild[i].nodeName == "#text" && !/\S/.test(eleChild[i].nodeValue)) {
+	        //删除数组中的text
+	        ele.removeChild(eleChild[i]);
+	    }
+    }
+    return eleChild;
+}
+</script>
+</html>
