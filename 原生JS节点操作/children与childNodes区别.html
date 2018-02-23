@@ -57,6 +57,7 @@ function myChildren2(ele){
         //console.log(eleChild[i].nodeName);	//#text  Li
         if(eleChild[i].nodeName == "#text" && !/\S/.test(eleChild[i].nodeValue)) {
 	        //删除数组中的text
+            //移除节点 removeChild
 	        ele.removeChild(eleChild[i]);
 	    }
     }
