@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>js中获取css样式属性值</title>
+  <style type="text/css">
+  #div1{
+	width:200px; 
+	height:200px; 
+	background:#ddd;
+  }
+  </style>
+</head>
+<body>
+  <div id="div1" style="width:100px;background-color:green;"></div>
+</body>
+<script type="text/javascript">
+window.onload=function(){  
+   var oDiv=document.getElementById('div1');
+   //使用style属性只能获取到内联样式
+   console.log(oDiv.style.backgroundColor);
+   console.log(getStyle(oDiv,'background'));
+}
+
+function getStyle(obj, attr){  
+    //只适用于IE
+    if(obj.currentStyle){
+        return obj.currentStyle[attr]; 
+    }else{ 
+        //适用于FF,Chrome,Safa 
+        return getComputedStyle(obj,false)[attr];  
+    }
+}  
+</script>
+</html>
