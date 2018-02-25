@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+    <script src="drag.js?3"></script>
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        ul,li {
+            list-style: none;
+        }
+        ul {
+            width:200px;
+        }
+        li {
+            margin-top: 10px;
+            width:200px;
+            height:30px;
+            line-height: 30px;
+            font-size:14px;
+            padding:0 5px;
+            border:1px solid #ccc;
+            cursor:pointer;
+            background: #F6F8FA;
+            border: 1px solid #D3D9E0;
+            border-radius: 2px;
+            
+        }
+    </style>
+</head>
+<body>
+<ul class="options">
+    <li class="option-list">1</li>
+    <li class="option-list">2</li>
+    <li class="option-list">3</li>
+    <li class="option-list">4</li>
+    <li class="option-list">5</li>
+    <li class="option-list">6</li>
+</ul>
+</body>
+<script>
+    $(function(){
+        $.KF_drag(".options",".option-list",{'border-color':'#1F8CEB','background':'green'});
+    })
+</script>
+</html>
