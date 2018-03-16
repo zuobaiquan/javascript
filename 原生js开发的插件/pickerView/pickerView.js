@@ -1,4 +1,4 @@
-// created by zhouatie
+
 (function() {
     var util = {
         extend: function(target) {
@@ -293,9 +293,5 @@
           body.removeChild(this.elem_wrap);
         }
     }
-
-
-
     window.PickerView = PickerView;
-
 })();
