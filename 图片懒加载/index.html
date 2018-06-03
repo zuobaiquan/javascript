@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<style type="text/css">
+*{margin:0;padding: 0;}
+img {display: block;width: 100%;height: auto;}
+</style>
+</head>
+<body>
+<img src="img/default.png" data-src="img/img1.png">
+<img src="img/default.png" data-src="img/img2.png">
+<img src="img/default.png" data-src="img/img3.png">
+<img src="img/default.png" data-src="img/img4.png">
+<img src="img/default.png" data-src="img/img5.png">
+<img src="img/default.png" data-src="img/img6.png">
+<img src="img/default.png" data-src="img/img7.png">
+<img src="img/default.png" data-src="img/img8.png">
+<img src="img/default.png" data-src="img/img9.png">
+<img src="img/default.png" data-src="img/img10.png">
+<script type="text/javascript"> 
+    var imgs  = document.querySelectorAll('img'),len = imgs.length; 
+    var n = 0;//存储图片加载到的位置，避免每次都从第一张图片开始遍历  
+    window.onscroll = function() { 
+        var seeHeight = document.documentElement.clientHeight; 
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop; 
+        for (let i = n; i < len; i++) { 
+            if(imgs[i].offsetTop < seeHeight + scrollTop) {
+                 if (imgs[i].getAttribute('src') == 'img/default.png'){ 
+                   imgs[i].src = imgs[i].getAttribute('data-src'); 
+                }
+                 n = i + 1; 
+                console.log('n = ' + n); 
+            }
+        } 
+    }; 
+</script> 
+</body>
+</html>
