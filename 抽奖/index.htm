@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html style="font-size: 130.667px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>抽奖</title>
+<style type="text/css">
+	.qimo8{ overflow:hidden;}
+	.qimo8 .qimo {/*width:99999999px;*/width:8000%;}
+	.qimo8 .qimo div{ float:left;}
+	.qimo8 .qimo ul{float:left;overflow:hidden; zoom:1; }
+	.qimo8 .qimo ul li{float:left; list-style:none; font-size: 24px;margin: 0 1rem;}
+</style>
+<link rel="stylesheet" type="text/css" href="index.css">
+<script src="common.js"></script>
+</head>
+<body>
+<div class="shanDeng" id="deng">
+<div id="luck"><!-- luck -->
+	<table style="border-spacing:.08rem .03rem;">
+		<tbody>
+			<tr>
+				<td class="luck-unit luck-unit-0"><img src="img/01.png"></td>
+				<td class="luck-unit luck-unit-1"><img src="img/02.png"></td>
+				<td class="luck-unit luck-unit-2"><img src="img/03.png"></td>
+			</tr>
+			<tr>
+				<td class="luck-unit luck-unit-7"><img src="img/05.png"></td>
+				<td class="cjBtn" id="btn"></td>
+				<td class="luck-unit luck-unit-3"><img src="img/01.png"></td>
+			</tr>
+			<tr>
+				<td class="luck-unit luck-unit-6"><img src="img/02.png"></td>
+				<td class="luck-unit luck-unit-5 active"><img src="img/04.png"></td>
+				<td class="luck-unit luck-unit-4"><img src="img/03.png"></td>
+			</tr>
+	    </tbody>
+	</table>
+</div><!-- luckEnd -->
+</div>
+
+<div class="play">
+	<span></span><div class="div">
+	<div id="demo" class="qimo8">
+		<div class="qimo">
+			<div id="demo1">
+				<ul>
+					<li>某某某获得一等奖</li>
+					<li>某某某获得四等奖</li>
+					<li>某某某获得三等奖</li>
+					<li>某某某获得二等奖</li>
+					<li>某某某获得四等奖</li>
+					<li>某某某获得三等奖</li>
+					<li>某某某获得二等奖</li>
+					<li>某某某获得三等奖</li>
+				</ul>
+			</div>
+			<div id="demo2">
+				<ul>
+					<li>某某某获得一等奖</li>
+					<li>某某某获得四等奖</li>
+					<li>某某某获得三等奖</li>
+					<li>某某某获得二等奖</li>
+					<li>某某某获得四等奖</li>
+					<li>某某某获得三等奖</li>
+					<li>某某某获得二等奖</li>
+					<li>某某某获得三等奖</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+	<script src="./jquery-1.8.3.min.js"></script>
+
+	<script>
+		var luck={
+			index:0,	//当前转动到哪个位置，起点位置
+			count:0,	//总共有多少个位置
+			timer:0,	//setTimeout的ID，用clearTimeout清除
+			speed:20,	//初始转动速度
+			times:0,	//转动次数
+			cycle:50,	//转动基本次数：即至少需要转动多少次再进入抽奖环节
+			prize:-1,	//中奖位置
+			init:function(id){
+				if ($("#"+id).find(".luck-unit").length>0) {
+					$luck = $("#"+id);
+					$units = $luck.find(".luck-unit");
+					this.obj = $luck;
+					this.count = $units.length;
+					$luck.find(".luck-unit-"+this.index).addClass("active");
+				};
+			},
+
+			
+			roll:function(){
+				var index = this.index;
+				var count = this.count;
+				var luck = this.obj;
+				$(luck).find(".luck-unit-"+index).removeClass("active");
+				index += 1;
+				if (index>count-1) {
+					index = 0;
+				};
+				$(luck).find(".luck-unit-"+index).addClass("active");
+				this.index=index;
+				return false;
+			},
+			stop:function(index){
+				this.prize=index;
+				return false;
+			}
+		};
+
+
+		function roll(){
+			luck.times += 1;
+			luck.roll();
+			if (luck.times > luck.cycle+10 && luck.prize==luck.index) {
+				clearTimeout(luck.timer);
+				luck.prize=-1;
+				luck.times=0;
+				click=false;
+			}else{
+				if (luck.times<luck.cycle) {
+					luck.speed -= 10;
+				}else if(luck.times==luck.cycle) {
+					var index = Math.random()*(luck.count)|0;
+                    if(index>5){
+                        index = 7;
+					}else {
+                        index = 5;
+					}
+                    luck.prize = index;//最终中奖位置
+				}else{
+					if (luck.times > luck.cycle+10 && ((luck.prize==0 && luck.index==7) || luck.prize==luck.index+1)) {
+						luck.speed += 110;
+					}else{
+						luck.speed += 20;
+					}
+				}
+				if (luck.speed<40) {
+					luck.speed=40;
+				};
+
+				luck.timer = setTimeout(roll,luck.speed);
+			}
+			return false;
+		}
+
+
+		var click=false;
+		window.onload=function(){
+			luck.init('luck');
+			$("#btn").click(function(){
+				/*//按下弹起效果
+				$("#btn").addClass("cjBtnDom");
+				setTimeout(function(){	
+					$("#btn").removeClass("cjBtnDom");
+				},200);*/
+				if(click) {
+					return false;
+				}
+				else{
+					luck.speed=100;
+					roll();
+					click=true;
+					return false;
+				}
+			});
+		};
+		//播报
+        var demo = document.getElementById("demo");
+        var demo1 = document.getElementById("demo1");
+        var demo2 = document.getElementById("demo2");
+        demo2.innerHTML=document.getElementById("demo1").innerHTML;
+        function Marquee(){
+            if(demo.scrollLeft-demo2.offsetWidth>=0){
+                demo.scrollLeft-=demo1.offsetWidth;
+            }
+            else{
+                demo.scrollLeft++;
+            }
+        }
+        setInterval(Marquee,10);
+	</script>
+</body>
+</html>

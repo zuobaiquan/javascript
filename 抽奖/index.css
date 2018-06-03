@@ -1,0 +1,70 @@
+body {
+    background-image: url(./img/bg-img.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 7.5rem;
+    height: 9.7rem;
+    padding-top: 3.6rem;
+}
+body:after {
+    position: relative;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+.shanDeng {
+    width: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-bottom: .15rem;
+}
+#btn .cjBtn, .shanDeng .active, .shanDeng td {
+    width: 1.74rem;
+    height: 1.48rem;
+    background-repeat: no-repeat;
+}
+#btn.cjBtn {
+    background-image: url(./img/cjBtn.png);
+    background-size: 100% 100%;
+}
+#btn.cjBtnDom {
+    background-image: url(./img/buttonDown.png);
+}
+#luck .active {
+    background-image: url(./img/active.png);
+}
+.shanDeng td {
+    text-align: center;
+    background-image: url(./img/proBj.png);
+    background-size: 100% 100%;
+}
+.shanDeng table {
+    margin: 0 auto;
+}
+/*rule s*/
+
+/*rule e*/
+ .play {
+    position: absolute;
+    top: 4%;
+    width: 100%;
+    height: .42rem;
+    line-height: .42rem;
+    background-color: #FFEAB2;
+}
+.play .div {
+    height: 100%;
+    margin-left: .7rem;
+    border-left: 2px solid #E84A54;
+}
+.play span {
+    background: url("./img/icon-laba.png") no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: .26rem;
+    width: .3rem;
+    margin: 0 .2rem;
+}
