@@ -6,16 +6,15 @@
     <script>
         //arguments对象并不是一个数组，但是访问单个参数的方式与访问数组元素的方式相同
         function show(){
-            console.log(arguments); 
+            console.log(arguments);
             //arguments.push(5);   //此时报错arguments.push is not a function
         }
         show(1,2,3,4);
         //在js中 不需要明确指出参数名，就能访问它们，例如：
 
         function test() {
-            var s = "";
             for (var i = 0; i < arguments.length; i++) {
-                alert(arguments[i]);
+                console.log(arguments[i]);
             }
         }
         test("name", "age");
