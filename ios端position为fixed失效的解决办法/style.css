@@ -1,6 +1,8 @@
 html {
     font-size: 62.5%;
-    -webkit-user-select: none;
+    -webkit-user-select: none; 
+}
+*{
     padding:0;margin:0;
 }
 .search-inputbox{
@@ -68,16 +70,17 @@ html {
   z-index:3
 }
 .dazhu-contentbox{
-  position:absolute;
-  top:6.5rem;
-  left:0;right:0;
-  bottom:0;
-  z-index:1;
+  margin-top:6.5rem;
   background:#171717;
   color:#8e8e93;
   overflow-y:scroll;
+  width: 100%;
   font-size: 1.5rem;
   text-align: center;
   border-top: 0.1rem solid #262626;
   -webkit-overflow-scrolling:touch
+}
+.dazhu-contentbox p{
+    display: block;
+    width: 100%;
 }
