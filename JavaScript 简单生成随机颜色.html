@@ -7,8 +7,13 @@
   *{ margin: 0;padding: 0; }
   body{ transition: .7s }
 </style>
+
+</head>
+<body>
+
+</body>
 <script type="text/javascript">
-  function color(){
+  function color1(){
     var colors = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' ];
     var c = '';
     for(var i=0; i<6; i++){
@@ -17,10 +22,9 @@
     }
     return '#' + c;
   }
-  document.body.style.background = color();
+  function color2(){
+    return '#' + Math.random().toString(16).substr(-6);
+  }
+  document.body.style.background = color2();
 </script>
-</head>
-<body>
-
-</body>
 </html>
