@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>搜索</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="search-inputbox" id="searchInputbox">
+    <div class="inputbox">
+      <div class="input-area">
+        <input id="inputForm" type="text" name="" placeholder="输入内容搜索" value="">
+        <i class="search-icon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="dazhu-contentbox" id="contentBox">
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+  </div>
+</body>
+<script type="text/javascript">
+  document.getElementById("searchInputbox").addEventListener('touchmove', handler, {passive: false});
+  function handler() {
+    event.preventDefault();
+  }
+  var contentBox=document.getElementById("contentBox")
+  contentBox.ontouchstart = function() {
+      document.getElementById("inputForm").blur()
+  }
+  // if(/iphone/i.test(navigator.userAgent)){
+  //   var contentBox=document.getElementById("contentBox")
+  //   $("#searchInputbox input").focus(function(){
+  //       contentBox.addEventListener('touchmove', handler, false);
+  //   })
+  //   $("#searchInputbox input").blur(function(){
+  //       contentBox.removeEventListener('touchmove', handler, false);
+  //   })
+  // }
+</script>
+</html>

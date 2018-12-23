@@ -5,14 +5,14 @@ function $(id) {
 window.onload = tab;
 
 function tab() {
-    // µ±Ç°¸ßÁÁÏÔÊ¾µÄÒ³Ç©µÄË÷Òı
+    // å½“å‰é«˜äº®æ˜¾ç¤ºçš„é¡µç­¾çš„ç´¢å¼•
     var index = 0;
     var timer = null;
 
-    // »ñÈ¡ËùÓĞµÄÒ³Ç©ºÍÒªÇĞ»»µÄÄÚÈİ
+    // è·å–æ‰€æœ‰çš„é¡µç­¾å’Œè¦åˆ‡æ¢çš„å†…å®¹
     var lis = $('notice-tit').getElementsByTagName('li');
     var divs = $('notice-con').getElementsByTagName('div');
-    // ±éÀúÃ¿Ò»¸öÒ³Ç©ÇÒ¸øËûÃÇ°ó¶¨ÊÂ¼ş
+    // éå†æ¯ä¸€ä¸ªé¡µç­¾ä¸”ç»™ä»–ä»¬ç»‘å®šäº‹ä»¶
     for (var i = 0; i < lis.length; i++) {
         lis[i].id = i;
         lis[i].onmouseover = function() {
@@ -28,7 +28,7 @@ function tab() {
         clearInterval(timer);
         timer = null;
     }
-    // Ìí¼Ó¶¨Ê±Æ÷£¬¸Ä±äµ±Ç°¸ßÁÁµÄË÷Òı
+    // æ·»åŠ å®šæ—¶å™¨ï¼Œæ”¹å˜å½“å‰é«˜äº®çš„ç´¢å¼•
     timer = setInterval(autoPlay, 2000);
 
     function autoPlay() {
@@ -44,7 +44,7 @@ function tab() {
             lis[j].className = '';
             divs[j].style.display = 'none';
         }
-        // ¸ßÁÁÏÔÊ¾µ±Ç°Ò³Ç©
+        // é«˜äº®æ˜¾ç¤ºå½“å‰é¡µç­¾
         lis[curIndex].className = 'select';
         divs[curIndex].style.display = 'block';
         index = curIndex;

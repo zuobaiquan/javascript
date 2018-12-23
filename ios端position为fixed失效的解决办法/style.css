@@ -1,0 +1,86 @@
+html {
+    font-size: 62.5%;
+    -webkit-user-select: none; 
+}
+*{
+    padding:0;margin:0;
+}
+.search-inputbox{
+    position:relative;
+    box-sizing:content-box;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:20;
+    height:6.5rem;
+    width:100%;
+    background:#171717
+}
+.search-inputbox .inputbox{
+    position:absolute;
+    right:5rem;
+    top:2.1rem;
+    width:70%;
+    height:4.4rem;
+    z-index:2
+}
+.search-inputbox .inputbox .input-area{
+    background:#0d0d0d;
+    position:absolute;
+    top:50%;
+    left:0;
+    width:100%;
+    -webkit-transform:translateY(-50%);
+    transform:translateY(-50%);
+    height:2.8rem;
+    text-align:right;
+    border-radius:0.8rem;
+    overflow:hidden
+}
+.search-inputbox .inputbox .input-area input{
+    width:calc(100% - 6.7rem);
+    border:0;background:#0d0d0d;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    color:#8e8e93;
+    height:2rem;
+    padding:0.4rem 0 0.4rem 0;
+    line-height:2rem;
+    text-align:left;
+    outline: none;
+}
+.search-inputbox .inputbox .input-area .search-icon{
+    position:absolute;
+    left:4.5rem;
+    top:50%;
+    -webkit-transform:translateY(-50%);
+    transform:translateY(-50%);
+    width:1.65rem;height:1.65rem;
+    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAMAAABgOjJdAAAAV1BMVEUAAACZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZkABlXAAAAAHHRSTlMA+QWTTOmIPg7u4dzLxGInHS3zpos2HKekoH0hgRomzwAAAOlJREFUOMutk1sSgyAMRQMi0PpArdpWs/919nYcqQIjPz1f4Jwh3hDIY3RTClE2o6EkbcWeqqWIteYT9RoIpsTXW6E6aZ0qbtiU51JKMIvF7lu7fPfqILiB+d7Tgf7OPDi/lTWEmU7MUGrpU+DIiQImFPKJEFNThEboPQdS2NiwSGS8/KYEhT+6YVYpQzE32wrN6lJGh7ZtK8EsU4ZERG/YawNV3HWV/J+OmbSZjuW6nr+5/O1nJkj04RTq3xRqweAhj8qwT7LstkkWoeLC1+CKUIlfVKyQGY+vclOeUJL8WXnBuFQgZIDwAUASGTiGgEcaAAAAAElFTkSuQmCC') 0 0/100% 100% no-repeat
+}
+.search-inputbox .inputbox .setting-icon{
+  position:absolute;
+  right:-3.5rem;
+  top:50%;
+  -webkit-transform:translateY(-50%);
+  transform:translateY(-50%);
+  width:2rem;
+  height:2.05rem;
+  z-index:3
+}
+.dazhu-contentbox{
+  margin-top:6.5rem;
+  background:#171717;
+  color:#8e8e93;
+  overflow-y:scroll;
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  border-top: 0.1rem solid #262626;
+  -webkit-overflow-scrolling:touch
+}
+.dazhu-contentbox p{
+    display: block;
+    width: 100%;
+}

@@ -6,9 +6,13 @@
   <title>js中获取css样式属性值</title>
   <style type="text/css">
   #div1{
-	width:200px; 
-	height:200px; 
+	width:200px;
+	height:200px;
 	background:#ddd;
+  }
+  #div1:before{
+    content:'我是伪元素内容';
+    color:#000;
   }
   </style>
 </head>
@@ -16,21 +20,23 @@
   <div id="div1" style="width:100px;background-color:green;"></div>
 </body>
 <script type="text/javascript">
-window.onload=function(){  
+window.onload=function(){
    var oDiv=document.getElementById('div1');
    //使用style属性只能获取到内联样式
    console.log(oDiv.style.backgroundColor);
    console.log(getStyle(oDiv,'background'));
+   console.log(getStyle(oDiv,'color',':before'));
 }
 
-function getStyle(obj, attr){  
+function getStyle(obj, attr,pseudoElt=false){
     //只适用于IE
     if(obj.currentStyle){
-        return obj.currentStyle[attr]; 
-    }else{ 
-        //适用于FF,Chrome,Safa 
-        return getComputedStyle(obj,false)[attr];  
+        return obj.currentStyle[attr];
+    }else{
+        //适用于FF,Chrome,Safa
+        return getComputedStyle(obj,pseudoElt)[attr];
     }
-}  
+    //return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,pseudoElt)[attr]
+}
 </script>
 </html>
