@@ -3,9 +3,44 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-
+    <div class="post-pic-list">
+			<img src="./img/paid_content_img1.png" class="post-pic" />
+			<img src="./img/paid_content_img2.png" class="post-pic" />
+			<img src="./img/paid_content_img3.png" class="post-pic" />
+		</div>
+    <div class="post-pic-list">
+			<img src="./img/paid_content_img1.png" class="post-pic" />
+			<img src="./img/paid_content_img2.png" class="post-pic" />
+			<img src="./img/paid_content_img3.png" class="post-pic" />
+		</div>
+    <div class="post-pic-list">
+			<img src="./img/paid_content_img1.png" class="post-pic" />
+			<img src="./img/paid_content_img2.png" class="post-pic" />
+			<img src="./img/paid_content_img3.png" class="post-pic" />
+		</div>
   </body>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/previewImage.js"></script>
+  <script type="text/javascript">
+
+  $(".post-pic-list img").click(function () {
+			var index = $(this).index()
+			var obj = { urls: [], current: null };
+			$(this).parent().find("img").each(function () {
+				obj.urls.push(this.src)
+			})
+			obj.current = obj.urls[index]
+			previewImage.start(obj);
+	})
+  var widthImg = $(".post-pic-list img").width()
+
+  $(".post-pic-list").each(function () {
+    $(this).find("img").css("height", widthImg)
+  })
+  </script>
 </html>

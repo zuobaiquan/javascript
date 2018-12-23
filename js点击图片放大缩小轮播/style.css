@@ -1,1 +1,17 @@
-@import "normalize";
+@import "normalize.css";
+.post-pic-list{
+  position: relative;
+  z-index: 2;
+  padding: 0.5rem 1rem 0 1rem;
+  font-size: 0;
+}
+.post-pic-list img{
+  margin-top: 0.5rem;
+  width: calc(33.33% - 0.5rem);
+  height: 11.4rem;
+  display: inline-block;
+  object-fit:cover;
+}
+.post-pic-list img:not(:nth-child(3n)){
+  margin-right: 0.5rem;
+}
