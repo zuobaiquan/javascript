@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>图片预览</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<style media="screen">
+html {
+  font-size: 62.5%;
+  -webkit-user-select: none;
+}
+*{
+  padding:0;margin:0;
+}
+.post-pic-list{
+  padding: 0.5rem 1rem 0 1rem;
+  margin-bottom: 0.6rem;
+  font-size: 0;
+}
+.post-pic-list .post-pic{
+  margin-top: 0.5rem;
+  width: calc(33.33% - 0.5rem);
+  height: 11.4rem;
+  display: inline-block;
+  object-fit: cover;
+}
+.post-pic-list .post-pic:not(:nth-child(3n)) {
+  margin-right: 0.5rem;
+}
+</style>
+</head>
+<body>
+  <div class="post-pic-list">
+    <img src="./img/1.jpg" class="post-pic" />
+    <img src="./img/2.jpg" class="post-pic" />
+    <img src="./img/3.jpg" class="post-pic" />
+  </div>
+  <div class="post-pic-list">
+    <img src="./img/1.jpg" class="post-pic" />
+    <img src="./img/2.jpg" class="post-pic" />
+    <img src="./img/3.jpg" class="post-pic" />
+  </div>
+</body>
+<script type="text/javascript" src="previewImage.js"></script>
+<script type="text/javascript" src="zepto.min.js"></script>
+<script type="text/javascript">
+    var obj ={urls:[],current:null}
+    var widthImg = getComputedStyle(document.querySelector(".post-pic-list img")).width ;
+    document.querySelectorAll('.post-pic-list').forEach(item => {
+      item.querySelectorAll('img').forEach(itemchild=>{
+        itemchild.style.height = widthImg
+      })
+    })
+
+    $(".post-pic-list img").click(function () {
+			var index = $(this).index()
+			var obj = { urls: [], current: null };
+			$(this).parent().find("img").each(function (index2) {
+				obj.urls.push({
+					src:this.src,
+					text:'我是文字我是文字我是文字我是文字我是文字我'+(index2+1)
+				})
+			})
+			obj.current = obj.urls[index]
+			previewImage.start(obj);
+		})
+
+
+
+
+</script>
+</html>

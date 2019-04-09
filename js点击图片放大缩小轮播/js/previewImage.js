@@ -1,105 +1,79 @@
-(function( global, factory ) {
-    //For CommonJS and CommonJS-like
-    if ( typeof module === "object" && typeof module.exports === "object" ) {
-        module.exports = global.document ?
-            factory( global, true ) :
-            function( w ) {
-                if ( !w.document ) {
-                    throw new Error( "previewImage requires a window with a document" );
-                }
-                return factory( w );
-            };
-    } else {
-        factory( global );
-    }
-
-// Pass this if window is not defined yet
-}(typeof window !== "undefined" ? window : this, function(window){
-    var $ = {};
-    var style = "#__previewImage-container{-ms-touch-action:none;touch-action:none;-webkit-touch-action:none;line-height:100vh;background-color:#000;width:100vw;height:100vh;position:fixed;overflow:hidden;top:0;left:0;z-index: 2147483647;transition:transform .3s;-ms-transition:transform .3s;-moz-transition:transform .3s;-webkit-transition:transform .3s;-o-transition:transform .3s;@keyframes roll{from {transform:rotate(0deg);}to {transform:rotate(360deg);}}@-webkit-keyframes roll{from {-webkit-transform:rotate(0deg);}to {-webkit-transform:rotate(360deg);}};transform:translate3d(100%,0,0);-webkit-transform:translate3d(100%,0,0);}#__previewImage-container .previewImage-text{position:absolute;top:0.5rem;text-align:center;font-size:1.4rem;color:#fff;z-index:10;left:50%;line-height: normal;transform:translateX(-50%);-webkit-transform:translateX(-50%)}#__previewImage-container .previewImage-text .previewImage-text-index{font-size: 1.4rem;}#__previewImage-container .previewImage-box{width:999999rem;height:100vh}#__previewImage-container .previewImage-box .previewImage-item{width:100vw;height:100vh;margin-right:15px;float:left;text-align:center;display:-webkit-box;display:flex;-webkit-box-align:center;align-items: center;}#__previewImage-container .previewImage-box .previewImage-item.previewImage-nobackground{background:none}#__previewImage-container .previewImage-box .previewImage-item .previewImage-image{vertical-align:middle;width:100%}";
-    $.isArray = function(value) {
-      return Object.prototype.toString.call(value) == '[object Array]';
-    }
-    /**
-     * get multiple elements
-     * @public
-     */
-    $.all = function(selector, contextElement) {
-      var nodeList,
-        list = [];
-      if (contextElement) {
-        nodeList = contextElement.querySelectorAll(selector);
-      } else {
-        nodeList = document.querySelectorAll(selector);
-      }
-      if (nodeList && nodeList.length > 0) {
-        list = Array.prototype.slice.call(nodeList);
-      }
-      return list;
-    }
-
-    /**
-     * delegate an event to a parent element
-     * @public
-     * @param  array     $el        parent element
-     * @param  string    eventType  name of the event
-     * @param  string    selector   target's selector
-     * @param  function  fn
-     */
-    $.delegate = function($el, eventType, selector, fn) {
-      if (!$el) { return; }
-      $el.addEventListener(eventType, function(e) {
-        var targets = $.all(selector, $el);
-        if (!targets) {
-          return;
+(function(){
+    var $ = {
+      isArray(value) {
+        return Object.prototype.toString.call(value) == '[object Array]'
+      },
+      all(selector, contextElement) {
+        var nodeList,
+          list = [];
+        if (contextElement) {
+          nodeList = contextElement.querySelectorAll(selector);
+        } else {
+          nodeList = document.querySelectorAll(selector);
         }
-        for (var i=0; i<targets.length; i++) {
-          var $node = e.target;
-          while ($node) {
-            if ($node == targets[i]) {
-              fn.call($node, e);
-              break;
-            }
-            $node = $node.parentNode;
-            if ($node == $el) {
-              break;
+        if (nodeList && nodeList.length > 0) {
+          list = Array.prototype.slice.call(nodeList);
+        }
+        return list
+      },
+      delegate($el, eventType, selector, fn) {
+        if (!$el) { return; }
+        $el.addEventListener(eventType, function(e) {
+          var targets = $.all(selector, $el);
+          if (!targets) {
+            return;
+          }
+          for (var i=0; i<targets.length; i++) {
+            var $node = e.target;
+            while ($node) {
+              if ($node == targets[i]) {
+                fn.call($node, e);
+                break;
+              }
+              $node = $node.parentNode;
+              if ($node == $el) {
+                break;
+              }
             }
           }
-        }
-      }, false);
-    };
-    var _previewImage = function(){
-        this.winw = window.innerWidth||document.body.clientWidth;  //窗口的宽度
-        this.winh = window.innerHeight||document.body.clientHeight; //窗口的高度
-        this.originWinw = this.winw;    //存储源窗口的宽度
-        this.originWinh = this.winh;    //存储源窗口的高度
-        this.marginRight = 15;  //图片之间的间隔->previewImage-item的margin-right
-        this.imageChageMoveX = this.marginRight+this.winw;  //图片切换容器的x位移量
-        this.imageChageNeedX = Math.floor(this.winw*(0.5)); //图片切换所需x位移量
-        this.cssprefix = ["","webkit","Moz","ms","o"]; //css前缀
-        this.version = '1.0.3'; //版本号
-        this.imgLoadCache = new Object();  //图片加载状态储存 key=md5(img.src),value={isload:true,elem:img};
-        this.scale = 1;     //默认图片放大倍数
-        this.maxScale = 4;  //图片默认最大放大倍数
-        this.maxOverScale = 6;  //图片放大倍数最大可达到
-        // this.minScale = 0.5; //图片最小可放大倍数
-        this.openTime = 0.3;    //打开图片浏览动画时间
-        this.slipTime = 0.5;    //图片切换时间
-        this.maxOverWidthPercent = 0.5; //边界图片最大可拉取宽度，屏幕宽度的百分比
-        this.$box = false;  //图片容器加载状态
-        this.isPreview = false; //是否正在预览图片
-        var $style = document.createElement('style');   //样式标签
-        $style.innerText = style;   //加载样式
-        $style.type = 'text/css';
-        this.$container = document.createElement('div');    //加载容器
-        this.$container.id = '__previewImage-container';    //容器加上id
-        this.$container.style.width = this.winw+'px';   //加上宽度
-        this.$container.style.height = this.winh+'px';  //加上高度
-        document.body.appendChild(this.$container);     //插入容器到body
-        document.head.appendChild($style);              //插入样式到head
-        this.bind();    //绑定事件
+        }, false);
+      }
     }
-    _previewImage.prototype.start = function(obj){  //可优化 todo
+
+    function previewImage(){
+      this.style= "#previewImage-container{touch-action:none;-webkit-touch-action:none;line-height:100vh;background-color:#000;width:100vw;height:100vh;position:fixed;overflow:hidden;top:0;left:0;z-index: 99;transition:transform .3s;-webkit-transition:transform .3s;-o-transition:transform .3s;transform:translate3d(100%,0,0);-webkit-transform:translate3d(100%,0,0);}#previewImage-container .previewImage-text{position:absolute;top:0.5rem;text-align:center;font-size:1.4rem;color:#fff;z-index:10;left:50%;line-height: normal;transform:translateX(-50%);-webkit-transform:translateX(-50%)}#previewImage-container .previewImage-text .previewImage-text-index{font-size: 1.4rem;}#previewImage-container .previewImage-box{width:999999rem;height:100vh}#previewImage-container .previewImage-box .previewImage-item{width:100vw;height:100vh;margin-right:15px;float:left;text-align:center;display:-webkit-box;display:flex;-webkit-box-align:center;align-items: center;}#previewImage-container .previewImage-box .previewImage-item.previewImage-nobackground{background:none}#previewImage-container .previewImage-box .previewImage-item .previewImage-image{vertical-align:middle;width:100%}";
+      this.winw = window.innerWidth||document.body.clientWidth;  //窗口的宽度
+      this.winh = window.innerHeight||document.body.clientHeight; //窗口的高度
+      this.originWinw = this.winw;    //存储源窗口的宽度
+      this.originWinh = this.winh;    //存储源窗口的高度
+      this.marginRight = 15;  //图片之间的间隔->previewImage-item的margin-right
+      this.imageChageMoveX = this.marginRight+this.winw;  //图片切换容器的x位移量
+      this.imageChageNeedX = Math.floor(this.winw*(0.5)); //图片切换所需x位移量
+      this.cssprefix = ["","webkit","Moz","ms","o"]; //css前缀
+      this.version = '1.0.3'; //版本号
+      this.imgLoadCache = new Object();  //图片加载状态储存 key=md5(img.src),value={isload:true,elem:img};
+      this.scale = 1;     //默认图片放大倍数
+      this.maxScale = 4;  //图片默认最大放大倍数
+      this.maxOverScale = 6;  //图片放大倍数最大可达到
+      // this.minScale = 0.5; //图片最小可放大倍数
+      this.openTime = 0.3;    //打开图片浏览动画时间
+      this.slipTime = 0.5;    //图片切换时间
+      this.maxOverWidthPercent = 0.5; //边界图片最大可拉取宽度，屏幕宽度的百分比
+      this.$box = false;  //图片容器加载状态
+      this.isPreview = false; //是否正在预览图片
+      var $style = document.createElement('style');   //样式标签
+      $style.innerText = this.style;   //加载样式
+      $style.type = 'text/css';
+      this.$container = document.createElement('div');    //加载容器
+      this.$container.id = 'previewImage-container';    //容器加上id
+      this.$container.style.width = this.winw+'px';   //加上宽度
+      this.$container.style.height = this.winh+'px';  //加上高度
+      document.body.appendChild(this.$container);     //插入容器到body
+      document.head.appendChild($style);              //插入样式到head
+      this.bind();    //绑定事件
+    }
+
+    previewImage.prototype.start = function(obj){  //可优化 todo
         var urls = obj.urls;    //待预览的图片列表
         var current = obj.current;  //当前预览的图片地址
 
@@ -127,7 +101,7 @@
         this.render();                //渲染预览模块
     }
 
-    _previewImage.prototype.render = function(){
+    previewImage.prototype.render = function(){
         var _this = this;
         if(this.$box===false){  //加载图片容器
             var box = document.createElement('div');
@@ -144,7 +118,7 @@
         this.box = this.imgStatusCache[this.bIndex] = {elem:this.$box,x:0,y:0,m:0,my:0,scale:1,scalem:1};   //存储图片容器状态
         this.urls.forEach(function(v,i){    //图片
             var div = document.createElement('div');
-            var hash = window.md5?md5(v+i):v+i;
+            var hash = v+i;
             var img;
             var imgCache = _this.imgLoadCache[hash];
             //缓存图片&&读取缓存图片
@@ -183,7 +157,7 @@
         },50);
     }
 
-    _previewImage.prototype.bind = function(){
+    previewImage.prototype.bind = function(){
         var $container = this.$container;
         var _this = this;
         var closePreview = function(){
@@ -198,26 +172,6 @@
         var touchEndFun = function(){
             _this.touchEndFun.call(_this);
         }
-
-        // var orientationChangeFun = function(){
-        //     var angle = screen.orientation.angle;
-        //     var _this = this;
-        //     if(angle==90||angle==180){
-        //         _this.winw = _this.originWinh;
-        //         _this.winh = _this.originWinw;
-        //     }else{
-        //         _this.winw = _this.originWinw;
-        //         _this.winh = _this.originWinh;
-        //     }
-        //     _this.$container.style.width = _this.winw+'px';   //改变宽度
-        //     _this.$container.style.height = _this.winh+'px';  //改变高度
-        //     _this.imageChageMoveX = _this.marginRight+_this.winw;
-        //     var offsetX = -_this.imageChageMoveX*_this.index;  //计算显示当前图片，容器所需偏移量
-        //     try{
-        //         _this.box.x = offsetX;   //将图片容器所需偏移量，存入状态缓存器
-        //         _this.translateScale(_this.bIndex,0);
-        //     }catch(e){}
-        // }.bind(this);
 
         var reSizeFun = function(){
             var _this = this;
@@ -244,7 +198,7 @@
         $.delegate($container,'touchcancel','.previewImage-item',touchEndFun);
     }
 
-    _previewImage.prototype.closePreview = function(){
+    previewImage.prototype.closePreview = function(){
         var _this = this;
         this.imgStatusCache[this.cIndex].x = this.winw;
         this.translateScale(this.cIndex,this.openTime);
@@ -256,27 +210,27 @@
         _this.isPreview = false;
     }
 
-    _previewImage.prototype.touchStartFun = function(imgitem){
+    previewImage.prototype.touchStartFun = function(imgitem){
         this.ts = this.getTouches();
         this.allowMove = true;  //行为标记
         this.statusX = 0; //标记X轴位移状态
         this.statusY = 0; //标记Y轴位移状态
     }
 
-    _previewImage.prototype.touchMoveFun = function(imgitem){
+    previewImage.prototype.touchMoveFun = function(imgitem){
         this.tm = this.getTouches();
         var tm = this.tm;
         var ts = this.ts;
         this.moveAction(ts,tm);
     }
 
-    _previewImage.prototype.touchEndFun = function(imgitem){
+    previewImage.prototype.touchEndFun = function(imgitem){
         var $container = this.$container;
         this.te = this.getTouches();
         this.endAction(this.ts,this.te);
     }
 
-    _previewImage.prototype.moveAction = function(ts,tm){
+    previewImage.prototype.moveAction = function(ts,tm){
         if(!this.allowMove){
             return
         }
@@ -368,7 +322,6 @@
                             imgStatus.my = - imgStatus.y + this.getSlowlyNum(imgPositionY,maxWidth);
                         }
                     }else{
-
                         this.statusX = 6;
                         imgStatus.my = y0_offset;
                     }
@@ -399,7 +352,7 @@
         }
     }
 
-    _previewImage.prototype.endAction = function(ts,te){
+    previewImage.prototype.endAction = function(ts,te){
         var imgStatus = this.getIndexImage();
         var x0_offset = te.x0 - ts.x0;
         var y0_offset = te.y0 - ts.y0;
@@ -520,7 +473,7 @@
         }
     };
 
-    _previewImage.prototype.getAllow = function(index){
+    previewImage.prototype.getAllow = function(index){
         var $img = this.getJqElem(index);
         var imgStatus = this.getIndexImage(index);
         var allowX = Math.floor(($img.width*imgStatus.scale-this.winw)/(2*imgStatus.scale));
@@ -542,7 +495,7 @@
         };
     };
 
-    _previewImage.prototype.getSlowlyNum = function(x,maxOver){
+    previewImage.prototype.getSlowlyNum = function(x,maxOver){
         var maxOver = maxOver||this.winw*this.maxOverWidthPercent;
         if(x<0){
             x = -x;
@@ -552,14 +505,14 @@
         }
     };
 
-    _previewImage.prototype.getScale = function(ts,tm){
+    previewImage.prototype.getScale = function(ts,tm){
         var fingerRangeS = Math.sqrt(Math.pow((ts.x1 - ts.x0),2)+Math.pow((ts.y1-ts.y0),2)); //两手指的初始距离
         var fingerRangeM = Math.sqrt(Math.pow((tm.x1 - tm.x0),2)+Math.pow((tm.y1-tm.y0),2)); //两手指移动过程中的距离
         var range = fingerRangeM/fingerRangeS;
         return range;
     };
 
-    _previewImage.prototype.imgStatusRewrite = function(index){
+    previewImage.prototype.imgStatusRewrite = function(index){
         var index = index===undefined?this.index:index;
         var imgStatus = this.imgStatusCache[index];
         imgStatus.x = 0;
@@ -573,7 +526,7 @@
         }
     }
 
-    _previewImage.prototype.changeIndex = function(x){
+    previewImage.prototype.changeIndex = function(x){
         var imgStatus = this.getIndexImage();
         var oldIndex = this.index;
         var _this = this;
@@ -604,45 +557,37 @@
         this.translateScale(this.bIndex,this.slipTime);
     }
 
-    _previewImage.prototype.getIndexImage = function(index){
+    previewImage.prototype.getIndexImage = function(index){
         var index = index==undefined?this.index:index;
         return  this.imgStatusCache[this.index];
     }
 
-    _previewImage.prototype.translateScale = function (index,duration){
+    previewImage.prototype.translateScale = function (index,duration){
         var imgStatus = this.imgStatusCache[index];
-        $elem = this.getJqElem(index);
         var scale = imgStatus.scale*imgStatus.scalem;
         var offsetX = imgStatus.x+imgStatus.m;
         var offsetY = imgStatus.y+imgStatus.my;
         var tran_3d='scale3d('+scale+','+scale+',1) '+' translate3d(' + offsetX + 'px,' + offsetY + 'px,0px)';
         // var tran_2d='scale('+scale+','+scale+') '+' translate(' + offsetX + 'px,' + offsetY +'px)';
         var transition = 'transform '+duration+'s ease-out';
-        this.addCssPrefix($elem,'transition',transition);
-        this.addCssPrefix($elem,'transform',tran_3d);
+        this.addCssPrefix(this.getJqElem(index),'transition',transition);
+        this.addCssPrefix(this.getJqElem(index),'transform',tran_3d);
     }
 
-    _previewImage.prototype.getJqElem = function(index){
-        var $elem;
+    previewImage.prototype.getJqElem = function(index){
         var index = index==undefined?this.index:index;
         if(index<=this.maxLen){
             var hash = this.imgStatusCache[index].hash;
             var img = this.imgLoadCache[hash].elem;
-            $elem = img;
+            return img;
         }else{
             var elem = this.imgStatusCache[index].elem;
-            $elem = elem;
+            return elem;
         }
-
-        return $elem
+        // return $elem
     }
-    /**
-     * [addCssPrefix 增加css前缀]
-     * @param {[elem]} elem  [element]
-     * @param {[string]} prop  [css attribute]
-     * @param {[string]} value [css value]
-     */
-    _previewImage.prototype.addCssPrefix = function(elem,prop,value){    //可以优化todo
+
+    previewImage.prototype.addCssPrefix = function(elem,prop,value){    //可以优化todo
         for(var i in this.cssprefix){
             var cssprefix = this.cssprefix[i];
             if(cssprefix===""){
@@ -658,7 +603,7 @@
         }
     }
 
-    _previewImage.prototype.getTouches = function(e){
+    previewImage.prototype.getTouches = function(e){
         var touches = event.touches.length>0?event.touches:event.changedTouches;
         var obj = {touches:touches,length:touches.length};
             obj.x0 = touches[0].pageX
@@ -670,13 +615,6 @@
         }
         return obj;
     }
-    window.previewImage = new _previewImage();
-    // AMD loader
-    if ( typeof define === "function" && define.amd ) {
-        define([], function() {
-            return previewImage;
-        } );
-    }
-
+    window.previewImage = new previewImage()
     return previewImage;
-}));
+})();
