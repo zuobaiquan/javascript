@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .input-list{
+        border:1px dashed #F00;
+        margin-top:10px;
+      }
+      .input-box{
+        margin-bottom: 5%;margin-right: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <button id="add" type="button" name="button">添加</button>
+  </body>
+  <script type="text/javascript">
+  var arr=[
+    {value1:'',value2:'',value3:''},
+  ]
+  renderData()
+  document.getElementById("add").onclick=function(){
+    getValueData()
+    arr.push({title1:'文案背景：',value1:'',title2:'文案标题：',value2:'',title3:'文案内容：',value3:''})
+    renderData()
+  }
+  function deleteItem(e){
+    getValueData()
+    var index= parseInt(e.getAttribute('data-id'))
+    if(arr.length<2){
+      return
+    }else{
+      arr.splice(index,1)
+      renderData()
+    }
+  }
+
+  function getValueData(){
+    document.querySelectorAll(".input-list").forEach(function(el,index) {
+        el.querySelectorAll(".input-box").forEach(function(elchild,indexchild) {
+          arr[index]['value'+(indexchild+1)]=elchild.querySelector("input").value
+        })
+    })
+  }
+
+  function renderData(){
+    var htmlString=''
+    for (var i = 0; i < arr.length; i++) {
+      htmlString+='<div class="input-list">\
+        <button onClick="deleteItem(this)" data-id="'+i+'" type="button" name="button">删除</button>\
+          <div class="input-box">\
+              <label>文案背景：</label>\
+              <input value="'+arr[i].value1+'">\
+          </div>\
+          <div class="input-box">\
+              <label>文案标题：</label>\
+              <input value="'+arr[i].value2+'" />\
+          </div>\
+          <div class="input-box">\
+              <label>文案内容：</label>\
+              <input value="'+arr[i].value3+'" />\
+          </div>\
+      </div>'
+    }
+    document.querySelector('.box').innerHTML = htmlString
+  }
+  </script>
+</html>
