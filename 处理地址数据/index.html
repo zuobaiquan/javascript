@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body></body>
+<script type="module">
+  import citylistData from './citylistData.js'
+  import outPutJson from './outPutJson.js'
+  let cityData=[]
+  for (let j = 0; j < citylistData.length; j++) {
+    for (let k = 0; k < citylistData[j].cityList.length; k++) {
+      cityData.push({
+        cityId:citylistData[j].cityList[k].cityId,
+        cityName:citylistData[j].cityList[k].cName,
+        data:[]
+      })
+    }
+  }
+  for (let i = 0; i < cityData.length; i++) {
+    for(let ii = 0; ii < outPutJson.length; ii++){
+      let ai = outPutJson[ii]
+      if(ai.cityName.indexOf(cityData[i].cityName)>-1 || cityData[i].cityName.indexOf(ai.cityName)>-1){
+        cityData[i].data.push(ai)
+      }
+    }
+  }
+  cityData.forEach(v=>{
+    v.airport=[],v.station=[],v.subway=[],v.busstation=[],v.hotaddr=[],v.college=[],v.spots=[],v.business=[],v.hospital=[],v.subwayNameArr=[]
+    v.data.forEach(vv=>{
+      if(vv.pOI=="10"){
+        v.airport.push(vv)
+      }
+      if(vv.pOI=="11"){
+        v.station.push(vv)
+      }
+      if(vv.pOI=="44"){
+        if(!v.subwayNameArr.includes(vv.pOIName)){
+          v.subwayNameArr.push(vv.pOIName)
+        }
+        let isExistIndex= v.subway.findIndex(kk=>{
+          return kk.name==vv.pOIName
+        })
+        if(isExistIndex==-1){
+          v.subway.push({
+            name:vv.pOIName,
+            subwaylist:[vv]
+          })
+        }else{
+          v.subway[isExistIndex].subwaylist.push(vv)
+        }
+        // for (let iii =  0; iii < v.subway.length; iii++) {
+        //   v.subway[iii].subwaylist = v.subway[iii].subwaylist.sort((a,b)=>{
+        //     return a.selectId-b.selectId
+        //   })
+        // }
+      }
+      if(vv.pOI=="12"){
+        v.busstation.push(vv)
+      }
+      if(vv.pOI=="48"){
+        v.hotaddr.push(vv)
+      }
+      if(vv.pOI=="15"){
+        v.college.push(vv)
+      }
+      if(vv.pOI=="17"){
+        v.spots.push(vv)
+      }
+      if(vv.pOI=="8"){
+        v.business.push(vv)
+      }
+      if(vv.pOI=="13"){
+        v.hospital.push(vv)
+      }
+    })
+  })
+  console.log("cityData",cityData)
+
+  //客运站数据
+  // let busstationObj ={}
+  // cityData.forEach(v=>{
+  //   let newArr = v.busstation.map(vv=>{
+  //     let lanlon= vv.location.split(",")
+  //     return {
+  //       lon:parseFloat(lanlon[0]).toFixed(6),
+  //       lat:parseFloat(lanlon[1]).toFixed(6),
+  //       addr:vv.address
+  //     }
+  //   })
+  //   busstationObj[v.cityId]=newArr
+  // })
+  // console.log("busstationObj",JSON.stringify(busstationObj))
+
+
+  //热门地区
+  let hotaddrObj ={}
+  cityData.forEach(v=>{
+    let newArr = v.hotaddr.map(vv=>{
+      let lanlon= vv.location.split(",")
+      return {
+        lon:parseFloat(lanlon[0]).toFixed(6),
+        lat:parseFloat(lanlon[1]).toFixed(6),
+        addr:vv.address
+      }
+    })
+    hotaddrObj[v.cityId]=newArr
+  })
+  console.log("hotaddrObj",JSON.stringify(hotaddrObj))
+
+
+  let businessaddrObj ={}
+  cityData.forEach(v=>{
+    let newArr = v.business.map(vv=>{
+      let lanlon= vv.location.split(",")
+      return {
+        lon:parseFloat(lanlon[0]).toFixed(6),
+        lat:parseFloat(lanlon[1]).toFixed(6),
+        addr:vv.address
+      }
+    })
+    businessaddrObj[v.cityId]=newArr
+  })
+  console.log("businessaddrObj",JSON.stringify(businessaddrObj))
+</script>
+</html>
