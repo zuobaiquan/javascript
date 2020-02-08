@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript">
+	// reduce() 方法接收一个函数作为累加器,reduce 为数组中的每一个元素依次执行回调函数，不包括数组中被删除或从未被赋值的元素，接受四个参数：初始值（上一次回调的返回值），当前元素值，当前索引，原数组 
+
+	// 语法：arr.reduce(callback,[initialValue])
+
+	// callback:函数中包含四个参数
+	// - previousValue （上一次调用回调返回的值，或者是提供的初始值（initialValue））
+	// - currentValue （数组中当前被处理的元素）
+	// - index （当前元素在数组中的索引)
+	// - array （调用的数组）
+	 
+	// initialValue （作为第一次调用 callback 的第一个参数。）
+	let arr = [1, 2, 3, 4, 5]
+	let sum = arr.reduce((pre, item) => {
+	    return pre + item
+	}, 0)
+	console.log(sum) // 15
+
+	// 以上回调被调用5次，每次的参数详见下表
+
+	// callback	previousValue currentValue index     array         return value
+	// 	第1次		 0				1		 0	[1, 2, 3, 4, 5]	     1
+	// 	第2次		 1				2		 1	[1, 2, 3, 4, 5]		 3
+	// 	第3次		 3				3		 2	[1, 2, 3, 4, 5]		 6
+	// 	第4次		 6				4		 3	[1, 2, 3, 4, 5]		 10
+	// 	第5次		 10				5		 4	[1, 2, 3, 4, 5]		 15
+	// 	
+	
+	//使用reduce方法可以完成多维度的数据叠加。
+	//例如：计算总成绩，且学科的占比不同
+
+	let scores = [
+	   { subject: 'math',score: 88 },
+	   { subject: 'chinese',score: 95 },
+	   { subject: 'english',score: 80 }
+	];
+	const dis = {
+		math: 0.5,
+		chinese: 0.3,
+		english: 0.2
+	}
+	let totalScore = scores.reduce((pre,item) => {
+	    return pre + item.score * dis[item.subject]
+	},0)
+	console.log(totalScore) // 88.5
+
+
+	//利用reduce来计算一个字符串中每个字母出现次数
+	let str = 'my name is zuobaiquan';
+	let result = str.split('').reduce((pre,item) => {
+		pre[item] ? pre[item] ++ : pre[item] = 1
+		// if(String(item).trim().length>0){
+		// 	//过滤空白字符
+		// 	pre[item] ? pre[item] ++ : pre[item] = 1
+		// }
+		return pre
+	},{})
+
+	console.log(result)
+
+	</script>
+</head>
+<body>
+</body>
+</html>
