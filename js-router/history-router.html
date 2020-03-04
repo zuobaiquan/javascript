@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history-router</title>
+    <style>
+        .box {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <ul> 
+        <li><a href="?/">turn white</a></li> 
+        <li><a href="?/blue">turn blue</a></li> 
+        <li><a href="?/green">turn green</a></li> 
+        <li><a href="?/pink">turn pink</a></li> 
+    </ul> 
+    <div class="box"></div>
+</body>
+</html>
+<script>
+    function HistoryRouter(opts) {
+        this.routes = opts.routes || {};//路由表
+    }
+    HistoryRouter.prototype.route = function(path, callback) {
+        this.routes[path] = callback || function(){};
+    };
+    HistoryRouter.prototype.refresh = function(e) {
+        this.routes[e.state.query]();
+    };
+    HistoryRouter.prototype.init = function() {
+        let obj = {};
+        if (this.routes) {
+            this.routes.forEach(function(v) {
+                obj[v.path] = v.callback || function(){};
+            })
+        }
+        this.routes = obj;
+        window.addEventListener('popstate', this.refresh.bind(this), false);
+    }
+    
+    var oBox = document.querySelector('.box');
+    function changeBgColor(color) {
+        oBox.style.backgroundColor = color;
+    }
+    var routes = [
+        {
+            path: '/',
+            callback: function() {
+                changeBgColor('white');
+            }
+        },
+        {
+            path: '/blue',
+            callback: function() {
+                changeBgColor('blue');
+            }
+        },
+        {
+            path: '/green',
+            callback: function() {
+                changeBgColor('green');
+            }
+        }
+    ]
+
+    var historyRouter = new HistoryRouter({
+        routes: routes
+    });
+    historyRouter.init();
+
+    historyRouter.route('/pink', function() {
+        changeBgColor('pink');
+    });
+
+
+    var links = document.querySelectorAll('a');
+    links.forEach(function(v, i) {
+        v.onclick = function(e){
+            var query = v.href.split('?')[1];
+            e.preventDefault(); 
+            historyRouter.routes[query]()
+            history.pushState({query: query}, null, '?'+query);
+        }
+    })
+</script>

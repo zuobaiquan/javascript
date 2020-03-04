@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hash-router</title>
+    <style>
+        .box {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <ul> 
+        <li><a href="#/">turn white</a></li> 
+        <li><a href="#/blue">turn blue</a></li> 
+        <li><a href="#/green">turn green</a></li> 
+        <li><a href="#/pink">turn pink</a></li> 
+    </ul> 
+    <div class="box"></div>
+</body>
+</html>
+<script>
+    function HashRouter(opts) {
+        this.routes = opts.routes || {};//路由表
+        this.currentUrl = ''; //当前路由
+    }
+    HashRouter.prototype.route = function(path, callback) {
+        this.routes[path] = callback || function(){};
+    };
+    HashRouter.prototype.refresh = function() {
+        this.currentUrl = location.hash.slice(1) || '/';
+        this.routes[this.currentUrl]();
+    };
+    HashRouter.prototype.init = function() {
+        let obj = {};
+        if (this.routes) {
+            this.routes.forEach(function(v) {
+                obj[v.path] = v.callback || function(){};
+            })
+        }
+        this.routes = obj;
+        window.addEventListener('load', this.refresh.bind(this), false);
+        window.addEventListener('hashchange', this.refresh.bind(this), false);
+    }
+    
+    var oBox = document.querySelector('.box');
+    function changeBgColor(color) {
+        oBox.style.backgroundColor = color;
+    }
+    var routes = [
+        {
+            path: '/',
+            callback: function() {
+                changeBgColor('white');
+            }
+        },
+        {
+            path: '/blue',
+            callback: function() {
+                changeBgColor('blue');
+            }
+        },
+        {
+            path: '/green',
+            callback: function() {
+                changeBgColor('green');
+            }
+        }
+    ]
+
+    var hashRouter = new HashRouter({
+        routes: routes
+    });
+    hashRouter.init();
+
+
+    hashRouter.route('/pink', function() {
+        changeBgColor('pink');
+    });
+
+
+</script>
