@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title></title>
 	<script type="text/javascript">
-	// reduce() 方法接收一个函数作为累加器,reduce 为数组中的每一个元素依次执行回调函数，不包括数组中被删除或从未被赋值的元素，接受四个参数：初始值（上一次回调的返回值），当前元素值，当前索引，原数组 
+	// reduce() 方法接收一个函数作为累加器,reduce 为数组中的每一个元素依次执行回调函数，不包括数组中被删除或从未被赋值的元素，接受四个参数：初始值（上一次回调的返回值），当前元素值，当前索引，原数组
 
 	// 语法：arr.reduce(callback,[initialValue])
 
@@ -13,7 +13,7 @@
 	// - currentValue （数组中当前被处理的元素）
 	// - index （当前元素在数组中的索引)
 	// - array （调用的数组）
-	 
+
 	// initialValue （作为第一次调用 callback 的第一个参数。）
 	let arr = [1, 2, 3, 4, 5]
 	let sum = arr.reduce((pre, item) => {
@@ -29,8 +29,8 @@
 	// 	第3次		 3				3		 2	[1, 2, 3, 4, 5]		 6
 	// 	第4次		 6				4		 3	[1, 2, 3, 4, 5]		 10
 	// 	第5次		 10				5		 4	[1, 2, 3, 4, 5]		 15
-	// 	
-	
+	//
+
 	//使用reduce方法可以完成多维度的数据叠加。
 	//例如：计算总成绩，且学科的占比不同
 
@@ -62,6 +62,11 @@
 	},{})
 
 	console.log(result)
+
+
+	[14,3,77,30].reduce((preValue, curValue)=>{
+	    return preValue = preValue > curValue ? preValue : curValue
+	})
 
 	</script>
 </head>

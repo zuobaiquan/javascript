@@ -123,6 +123,49 @@ return result;//改动
 ctx.__proto__[fn] = this;
 ```
 
+或者
+
+```javascript
+Function.prototype.call = function (context) {
+    /** 如果第一个参数传入的是 null 或者是 undefined, 那么指向this指向 window/global */
+    /** 如果第一个参数传入的不是null或者是undefined, 那么必须是一个对象 */
+    if (!context) {
+        //context为null或者是undefined
+        context = typeof window === 'undefined' ? global : window;
+    }
+    context.fn = this; //this指向的是当前的函数(Function的实例)
+    let args = [...arguments].slice(1);//获取除了this指向对象以外的参数, 空数组slice后返回的仍然是空数组
+    let result = context.fn(...args); //隐式绑定,当前函数的this指向了context.
+    delete context.fn;
+    return result;
+}
+```
+
+apply原理
+
+```javascript
+Function.prototype.apply = function (context, rest) {
+    if (!context) {
+        //context为null或者是undefined时,设置默认值
+        context = typeof window === 'undefined' ? global : window;
+    }
+    context.fn = this;
+    let result;
+    if(rest === undefined || rest === null) {
+        //undefined 或者 是 null 不是 Iterator 对象，不能被 ...
+        result = context.fn(rest);
+    }else if(typeof rest === 'object') {
+        result = context.fn(...rest);
+    }
+    delete context.fn;
+    return result;
+}
+```
+
+
+
+
+
 ##### 三、自定义 apply
 
 call 和 apply 的在使用的时候，有个区别就是 apply 的参数必须是通过数组的形式，参数进去。类似这样 `fun.apply(obj,[1,2,3]);` 这个实现起来就比较简单了， 改变 this 指向和 call 同理，参数直接是个数组都省的我们去处理了。

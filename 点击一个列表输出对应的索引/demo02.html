@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<ul>
+		<li data-index="0">测试1</li>
+		<li data-index="1">测试2</li>
+		<li data-index="2">测试3</li>
+		<li data-index="3">测试4</li>
+		<li data-index="4">测试5</li>
+		<li data-index="5">测试6</li>
+	</ul>
+</body>
+<script type="text/javascript">
+	var ul = document.querySelector("ul");
+	var li = document.querySelectorAll("li");
+	//e指event,事件对象
+	ul.onclick = function(e){
+		//target获取触发事件的目标(li)
+		var target = e.target || e.srcElement;
+		console.log("target",target)
+		if(target.nodeName.toLowerCase() == 'li'){
+			//目标(li)节点名转小写字母，不转的话是大写字母
+			console.log(e.target.getAttribute('data-index'))
+			//console.log(e.target,target.innerHTML)
+		}
+	}
+</script>
+</html>

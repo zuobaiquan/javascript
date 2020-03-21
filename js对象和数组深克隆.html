@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>js对象和数组深克隆</title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript">
+  function clone (obj) {
+      var o;
+      if(typeof obj == "object") {
+          if(obj === null) {
+              o = null;
+          } else {
+              if(obj instanceof Array) {
+                  o = [];
+                  for (var i = 0, len = obj.length; i < len; i++) {
+                      o.push(this.clone(obj[i]));
+                  }
+              } else {
+                  o = {};
+                  for (var j in obj) {
+                      o[j] = this.clone(obj[j]);
+                  }
+              }
+          }
+      } else {
+          o = obj;
+      }
+      return o;
+  }
+  </script>
+</html>
