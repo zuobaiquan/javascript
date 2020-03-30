@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body></body>
+  <script type="text/javascript">
+  function instanceOf(left, right) {
+      let prototype = right.prototype;
+      let proto = left.__proto__;
+      while (true) {
+          if (proto === prototype) return true;
+          if (proto === null) return false;
+          proto = proto.__proto__;
+      }
+  }
+
+  var arr = [1, 2, 3];
+  console.log(instanceOf(arr, Function));
+  console.log(instanceOf(arr, Array));
+  </script>
+</html>
