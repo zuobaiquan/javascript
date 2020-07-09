@@ -22,6 +22,6 @@
 
 如果觉得对你帮助，记得打赏哦。
 
-![591517660778_.pic](https://zuobaiquan.com/blogImg/CSS/pay.png)
+![591517660778_.pic](https://zuobaiquan.github.io/blogImg/CSS/pay.png)
 
 
