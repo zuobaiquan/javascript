@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script type="text/javascript" src="vue.js"></script>
+		<script type="text/temlate" id="tpl">
+		<div>
+			<ul>
+				<li v-for="item in types"><button v-on:click = "sortBy(item.key)">{{item.value}}</button></li>
+			</ul>
+			<ul>
+				<li class="product" v-for="item in list">
+					<div class="imageContainer">
+						<img v-bind:src="item.img">
+						<div class="layer">
+							<p>找同款</p>
+							<p>找相似</p>
+						</div>
+					</div>
+					<div class="content">
+						<p class="price">
+							<span class="price-text">￥{{item.price}}</span>
+							<span class="sales">{{item.sales}}人付款</span>
+						</p>
+						<p class="title">{{item.title}}</p>
+						<p class="store">
+							<span class="store-text">{{item.store}}</span>
+							<span class="adress">{{item.adress}}</span>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<my-app></my-app>
+		</div>
+		<script type="text/javascript">
+			var Util = {//工具类
+				getId: function(id){
+					return document.getElementById(id);
+				},
+				ajax : function(url,callback){
+					//创建xhr对象
+					var xhr = new XMLHttpRequest();
+					//订阅事件
+					xhr.onreadystatechange = function(){
+						if (xhr.readyState === 4)
+						{
+							if (xhr.status === 200)
+							{
+								//返回数据
+								var data = JSON.parse(xhr.responseText);
+								//console.log(data)
+								//处理数据(具体问题具体处理)
+								callback && callback(data);
+							}
+						}
+					}
+					//open方法
+					xhr.open('get',url,true);
+					//send方法
+					xhr.send(null);
+				}
+			}
+
+			//创建vue组件
+			Vue.component("my-app",{
+				//模板
+				template: Util.getId("tpl").innerHTML,
+				//数据
+				data: function(){
+					return {
+						//用list来存储数据
+						list: '',
+						//排序
+						types:[
+							{"value":"综合排序","key":"comprehensive"},
+							{"value":"销量排序","key":"sales"},
+							{"value":"价格排序","key":"price"}
+						]
+					}
+				},
+				//当组件被创建的时候就请求数据
+				created: function(){
+					console.log(this,1)//vueComponent
+					var This = this;
+					//ajax异步请求
+					Util.ajax("data/list.json",function(data){
+						//console.log(this,2)//window
+						This.list = data.list;
+					})
+				},
+				//自定义事件
+				methods:{
+					sortBy: function(key){
+						//console.log(this)//vueComponent
+						if (key === "comprehensive" )
+						{
+							//综合排序 随机排序
+							this.list.sort(function(a,b){
+								return Math.random() - 0.5
+							});
+						}else if (key === "sales" )
+						{
+							//销量 从高到底
+							this.list.sort(function(a,b){
+								return b.sales-a.sales
+								//console.log(a,1)
+								//console.log(b,2)
+							});
+
+						}else{
+							//价格 从低到高
+							this.list.sort(function(a,b){
+								return a.price-b.price
+							});
+						}
+					}
+				}
+			})
+			var vm = new Vue({
+				el : "#app"
+			})
+		</script>
+	</body>
+</html>

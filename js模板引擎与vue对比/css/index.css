@@ -1,0 +1,86 @@
+*{margin: 0;padding: 0;}
+#app{
+  width: 1088px;
+  margin: 50px auto;
+  font-family: "微软雅黑";
+}
+li{
+  list-style:none;
+}
+.product{
+  width: 250px;
+  height: 360px;
+  float: left;
+  border: 1px solid #ccc;
+  margin: 10px;
+}
+.product:hover{
+  border: 1px solid #F55B24;
+}
+.imageContainer{
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+.layer{
+  position: absolute;
+  left:0;
+  bottom: 0;
+  height: 30px;
+  width: 250px;
+  background: #F55B24;
+  display: none;
+}
+.product:hover .layer{
+  display: block;
+}
+.layer p{
+  width:125px;
+  float: left;
+  line-height: 30px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+}
+.content{
+  padding: 10px
+}
+.content .price{
+  width: 100%;
+  line-height: 40px;
+  height: 40px;
+}
+.price .price-text{
+  color: #F55B24;
+  font-size: 20px;
+  float: left;
+  font-weight: bold;
+}
+.price .price-text span{
+  color: #fff;
+  font-size: 12px;
+  background: #F55B24;
+  font-weight: 400;
+  vertical-align: top;
+}
+.price .sum{
+  color: #999;
+  font-size: 12px;
+  float: right;
+}
+.title{
+  color: #666;
+  font-size: 12px;
+}
+.store{
+  width: 100%;
+  color: #999;
+  font-size: 12px;
+  line-height: 30px;
+}
+.store .store-title{
+  float: left;
+}
+.store .adress{
+  float: right;
+}

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<link rel="stylesheet" href="css/index.css">
+		<script type="text/temlate" id="tpl">
+		<div class="product">
+			<div class="imageContainer">
+				<img src="{#img#}">
+				<div class="layer">
+					<p>找同款</p>
+					<p>找相似</p>
+				</div>
+			</div>
+			<div class="content">
+				<p class="price">
+					<span class="price-text">￥{#price#}</span>
+					<span class="sales">{#sales#}人付款</span>
+				</p>
+				<p class="title">{#title#}</p>
+				<p class="store">
+					<span class="store-text">{#store#}</span>
+					<span class="adress">{#adress#}</span>
+				</p>
+			</div>
+		</div>
+		</script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/javascript">
+			var Util = {//工具类
+				getId: function(id){
+					return document.getElementById(id);
+				},
+				ajax : function(url,callback){
+					//创建xhr对象
+					var xhr = new XMLHttpRequest();
+					//订阅事件
+					xhr.onreadystatechange = function(){
+						if (xhr.readyState === 4)
+						{
+							if (xhr.status === 200)
+							{
+								//返回数据
+								var data = JSON.parse(xhr.responseText);
+								//console.log(data)
+								//处理数据(具体问题具体处理)
+								callback && callback(data);
+							}
+						}
+					}
+					//open方法
+					xhr.open('get',url,true);
+					//send方法
+					xhr.send(null);
+				}
+			}
+
+			var html="";
+			var tpl=Util.getId("tpl").innerHTML;
+			function formString(str,data){
+				return str.replace(/\{#(\w+)#\}/g,function(match,$1){
+					//console.log(arguments);
+					return data[$1];
+				})
+			}
+			Util.ajax("data/list.json",function(data){
+				var listData=data.list;
+				for(var i=0;i<listData.length;i++){
+					html+=formString(tpl,listData[i]);
+				}
+				Util.getId("app").innerHTML=html;
+			})
+
+		</script>
+	</body>
+</html>

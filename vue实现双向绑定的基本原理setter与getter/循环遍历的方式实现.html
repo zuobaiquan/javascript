@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//我的希望是通过循环遍历的方式把普通函数转换成访问器的方式，但是实测下述方式是不行的，只能针对每个属性手动修改
+			//当然这是不被希望的。查看了vue的源码，发现他也不是将对象转换而是编译的时候将data属性拷贝出来放在new Vue()中,只不过拷贝出来的属性添加的方式
+			//是采用访问器的方式。这也解释了，为啥取得data中的数据，采用this.prop就行而不是this.data.prop，data中的属性和值只是提供了一个待拷贝的
+			//属性和默认值而已，并不做具体逻辑操作。
+			//具体实现方式见【new_file3.html】
+			var obj = {
+				prop1: "this is prop1",
+				prop2: "this is prop2"
+			};
+			(function(obj){
+				for(var prop in obj){
+					obj["_"+prop] = obj[prop];
+					var newObj = Object.defineProperty(obj,prop,{
+						set: function(value){
+							console.log("set成功了");
+							obj["_"+prop] = value;
+						},
+						get: function(){
+							console.log("get成功了")
+							return obj["_"+prop];
+						}
+					})
+					console.log(obj.prop1)
+				}
+				
+			})(obj);
+			//obj.prop1;
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

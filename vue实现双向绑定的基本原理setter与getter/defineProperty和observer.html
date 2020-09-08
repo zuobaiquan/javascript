@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+	
+		//对象是由属性和值这种键值对的方式构建的，值可以是基本值，函数和对象。我们常用的键值对的搭配方式就是使用了属性的数据属性定义的，即key:value的方式，
+		//而此外属性也可以是采用访问器属性定义，即是用set和get的方式自定义属性值得获取和赋值的方式，且每次对访问器属性进行获取（obj.key）和赋值（obj.key = value）,
+		//都会触发set和get函数，这也是vue实现数据双向绑定的基础。
+		//此外需要注意，数据属性一般用于存储数据数值，而访问器属性一般进行get/set操作，不能直接存储数据数值。故而需要采用中间属性_name存储name属性的值
+	
+		var data = {name: 'zuobaiquan'};
+		observe(data);
+		data.name = 'zuobaiquan01'; // 哈哈哈，监听到值变化了 zuobaiquan --> zuobaiquan01
+
+		function observe(data) {
+		    if (!data || typeof data !== 'object') {
+		        return;
+		    }
+		    // 取出所有属性遍历
+		    Object.keys(data).forEach(function(key) {
+		        defineReactive(data, key, data[key]);
+		    });
+		};
+
+		function defineReactive(data, key, val) {
+		    observe(val); // 监听子属性
+		    Object.defineProperty(data, key, {
+		        enumerable: true, // 可枚举
+		        configurable: false, // 不能再define
+		        get: function() {
+		            return val;
+		        },
+		        set: function(newVal) {
+		            console.log('哈哈哈，监听到值变化了 ', val, ' --> ', newVal);
+		            val = newVal;
+		        }
+		    });
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
