@@ -1,5 +1,8 @@
 
-# 生成 jest.config 配置文件
+# jest文档
+https://jestjs.io/docs/zh-Hans/getting-started.html
+
+# 生成一个基础配置文件
 npx jest --init
 
 # 生成测试报告，测试代码覆盖率
