@@ -1,8 +1,8 @@
 
 function expect(result){
     return {
-        toBe: function(actual){
-            if (result !== actual){
+        toBe: function (actual) {
+            if (result !== actual) {
                 throw new Error(`预期值和实际值不相等 预期${actual} 结果却是${result}`)
             }
         }
