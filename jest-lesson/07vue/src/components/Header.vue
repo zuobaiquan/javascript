@@ -1,6 +1,14 @@
 <template>
   <div class="header">
-    <input v-model="inputValue" @keyup.enter="addTodoItem" />
+    <div class="header-content">
+      TodoList
+      <input
+        class="header-inputs"
+        v-model="inputValue"
+        @keyup.enter="addTodoItem"
+        placeholder="TodoItem"
+      />
+    </div>
   </div>
 </template>
 
@@ -23,5 +31,22 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
+.header {
+  line-height: 60px;
+  background: #333;
+  .header-content {
+    width: 600px;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 24px;
+    .header-inputs {
+      float: right;
+      width: 360px;
+      margin-top: 16px;
+      line-height: 24px;
+      outline: none;
+      color: #333;
+    }
+  }
+}
 </style>

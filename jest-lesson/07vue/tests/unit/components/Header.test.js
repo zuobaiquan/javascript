@@ -1,37 +1,42 @@
 import { shallowMount } from '@vue/test-utils'
-import Header from "@/components/Header";
+import Header from '@/components/Header.vue'
 
-describe("Header.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "111";
-    const wrapper = shallowMount(Header, {
-      propsData: { msg }
-    });
-    // let inputValue = wrapper.vm.$data.inputValue;
-    // expect(inputValue).toBe("");
-    const inputEle = wrapper.find('input')
-    inputEle.setValue("zuobaiquan");
-    const inputValue = wrapper.vm.$data.inputValue;
-    expect(inputValue).toBe("zuobaiquan");
-  });
-  it('Header中的input输入回车，无内容无反应',()=>{
-    const wrapper = shallowMount(Header);
-    const inputEle = wrapper.find("input");
-    inputEle.setValue('')
-    inputEle.trigger("keyup.enter");
-    expect(wrapper.emitted().add).toBeFalsy();
+describe('Header组件测试', () => {
+  it('样式发生改变，做提示', () => {
+    const wrapper = shallowMount(Header)
+    // expect(wrapper).toMatchSnapshot()
+    // const input = wrapper.find('[data-test="input"]')
+    // expect(input.exists()).toBe(true)
   })
 
-  it("Header中的input输入回车，有内容无反应", () => {
-    const wrapper = shallowMount(Header);
-    const inputEle = wrapper.find("input");
-    inputEle.setValue("zuobaiquan");
-    inputEle.trigger("keyup.enter");
-    expect(wrapper.emitted().add).toBeTruthy();
-    const inputValue = wrapper.vm.$data.inputValue;
-    expect(inputValue).toBe("");
+  it('input 框初始内容为空', () => {
+    const wrapper = shallowMount(Header)
+    const inputValue = wrapper.vm.inputValue
+    expect(inputValue).toBe('')
+  })
 
-  });
+  it('input 框发生变化，数据应该跟着改变', () => {
+    const wrapper = shallowMount(Header)
+    const input = wrapper.findAll(".header-inputs");
+    input.setValue('dell lee')
+    const inputValue = wrapper.vm.inputValue
+    expect(inputValue).toBe('dell lee')
+  })
 
+  it('input 框回车，无内容时无反应', () => {
+    const wrapper = shallowMount(Header)
+    const input = wrapper.findAll(".header-inputs")
+    input.setValue('')
+    input.trigger('keyup.enter')
+    expect(wrapper.emitted().add).toBeFalsy()
+  })
 
-});
+  it('input 框回车，有内容时向外触发事件,同时清空 inputValue', () => {
+    const wrapper = shallowMount(Header)
+    const input = wrapper.findAll(".header-inputs")
+    input.setValue('dell lee')
+    input.trigger('keyup.enter')
+    expect(wrapper.emitted().add).toBeTruthy()
+    expect(wrapper.vm.inputValue).toBe('')
+  })
+})
