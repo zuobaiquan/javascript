@@ -5,6 +5,7 @@ import UndoList from '@/components/UndoList'
 describe('TodoList组件测试', () => {
   it('组件正常渲染', () => {
     const wrapper = shallowMount(TodoList)
+    expect(wrapper).toMatchSnapshot();
   })
 
   it('addUndoItem 执行后，内容增加', () => {

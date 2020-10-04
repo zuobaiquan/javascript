@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header组件测试 样式发生改变，做提示 1`] = `
+<div class="header">
+  <div class="header-content">
+    TodoList
+    <input placeholder="TodoItem" class="header-inputs">
+  </div>
+</div>
+`;

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoList组件测试 组件正常渲染 1`] = `
+<div>
+  <header-stub></header-stub>
+  <undolist-stub list=""></undolist-stub>
+</div>
+`;
