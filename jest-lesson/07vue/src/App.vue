@@ -16,5 +16,10 @@ export default {
 <style lang="scss">
 *{
   margin:0;padding:0;
+  
+}
+#app{
+  background:#EFFFFF;
+  padding:10px 0;
 }
 </style>
