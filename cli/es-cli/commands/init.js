@@ -1,15 +1,7 @@
-const {
-    prompt
-} = require('inquirer')
-const {
-    writeFile
-} = require('fs')
-const {
-    listTable
-} = require(`${__dirname}/../utils`)
-const {
-    resolve
-} = require('path')
+const { prompt } = require('inquirer')
+const { writeFile } = require('fs')
+const { listTable } = require(`${__dirname}/../utils`)
+const { resolve } = require('path')
 const chalk = require('chalk')
 const download = require('download-git-repo')
 const ora = require('ora')
@@ -30,9 +22,7 @@ module.exports = prompt(question).then(({
     project
 }) => {
     const spinner = ora('Downloading imooc-es-cli...')
-
     spinner.start()
-
     download(`github:xiecheng328/imooc-es-parser`, `./${project}`, (err) => {
         if (err) {
             console.log(chalk.red(err))

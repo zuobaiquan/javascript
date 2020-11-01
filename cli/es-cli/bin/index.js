@@ -2,19 +2,15 @@
 
 process.env.NODE_PATH = __dirname + '/../node_modules/'
 
-const {
-  resolve
-} = require('path')
+const { resolve } = require('path')
 
 const res = command => resolve(__dirname, '../commands/', command)
 
 const program = require('commander')
 
-program
-  .version(require('../package').version)
+program.version(require('../package').version)
 
-program
-  .usage('<command>')
+program.usage('<command>')
 
 program
   .command('init')

@@ -1,5 +1,6 @@
-# imooc-es-cli
-A simple CLI for imooc ES
+# es-cli
+
+A simple CLI for ES
 
 ## Getting Started
 
@@ -24,7 +25,3 @@ Usage: imooc-es-cli <command>
     -h, --help     output usage information
     -V, --version  output the version number
 ```
-
-## License
-
-[**The MIT License**](LICENSE).
