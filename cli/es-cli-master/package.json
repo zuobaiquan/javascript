@@ -1,0 +1,37 @@
+{
+  "name": "imooc-es-cli",
+  "version": "1.0.3",
+  "description": "A simple CLI for imooc ES",
+  "bin": {
+    "imooc-es-cli": "./bin/index.js"
+  },
+  "main": "bin/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiecheng328/imooc-es-cli"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "imooc",
+    "es",
+    "cli"
+  ],
+  "author": "xiecheng",
+  "license": "MIT",
+  "homepage": "https://www.imooc.com/t/7558683",
+  "bugs": {
+    "url": "https://github.com/xiecheng328/imooc-es-cli/issues"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "cli-table": "^0.3.1",
+    "commander": "^5.0.0",
+    "download-git-repo": "^3.0.2",
+    "handlebars": "^4.7.4",
+    "inquirer": "^7.1.0",
+    "metalsmith": "^2.3.0",
+    "ora": "^4.0.3"
+  }
+}
