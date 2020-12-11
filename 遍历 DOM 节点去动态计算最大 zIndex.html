@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .pop1{ position: relative; z-index: 1;}
+    .pop2{ position: relative; z-index: 2;}
+    .pop3{ position: relative; z-index: 4;}
+    .pop4{ position: relative; z-index: 89;}
+    .pop5{ position: relative; z-index: 10;}
+  </style>
+</head>
+<body>
+  <div class="pop1"></div>  
+  <div class="pop2"></div>  
+  <div class="pop3"><div class="pop4"></div></div> 
+  <div class="pop5"><div class="pop6"></div><div class="pop7"></div></div>  
+</body>
+<script>
+  function getZIndex(){
+      return [...document.all].reduce((r, e) => Math.max(r, +window.getComputedStyle(e).zIndex || 0), 0)
+  }
+  console.log('getZIndex',getZIndex())
+</script>
+</html>
