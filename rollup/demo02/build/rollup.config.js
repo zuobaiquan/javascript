@@ -1,9 +1,5 @@
 const path = require('path');
-// 将rollup和babel进行了完美结合
-const babel = require('rollup-plugin-babel');
-
-//安装 rollup.js 编译ES6代码基础插件 模块
-const buble = require('@rollup/plugin-buble');
+const { babel } = require('@rollup/plugin-babel');
 const resolve = function (filePath) {
   return path.join(__dirname, '..', filePath)
 }
@@ -20,15 +16,11 @@ module.exports = {
     umd: 通用模块定义，以amd、cjs和iife为一体。
     system: SystemJS加载器格式。
     */
-    format: 'iife'
+    format: 'umd'
   },
   plugins: [
     babel({
-      babelrc: false,
-      // 可参考 demo02 的方式
-      plugins: ['@babel/plugin-proposal-optional-chaining'],
-      exclude: 'node_modules/**'
-    }),
-    buble()
+      presets: ['@babel/preset-env']
+    })
   ],
 }

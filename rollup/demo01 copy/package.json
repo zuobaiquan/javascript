@@ -1,0 +1,15 @@
+{
+  "name": "rollup",
+  "version": "1.0.0",
+  "description": "中文网：https://www.rollupjs.com/",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rollup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^2.39.1"
+  }
+}
