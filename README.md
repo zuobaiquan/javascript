@@ -4,11 +4,6 @@
 
 polacode  截图部分code代码
 
-[原生JS实现Tab切换01](https://zuobaiquan.github.io/javascript/%E5%8E%9F%E7%94%9Fjs%E5%AE%9E%E7%8E%B0tab%E5%88%87%E6%8D%A2/Tab-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A201/index.html) 
-
-[原生JS实现Tab切换02](https://zuobaiquan.github.io/javascript/%E5%8E%9F%E7%94%9Fjs%E5%AE%9E%E7%8E%B0tab%E5%88%87%E6%8D%A2/Tab-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A202/index.html)
-
-[瑞德启蒙网站](https://zuobaiquan.github.io/javascript/web_01/index.html)
 
 [径向动画菜单效果分步演示](https://zuobaiquan.github.io/javascript/web_02/index.html)
 
@@ -23,12 +18,3 @@ polacode  截图部分code代码
 ```javascript
 <script src="https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/2.5.1/vconsole.min.js"></script>
 ```
-
-https://hsmap.com/
-不错的网站也
-
-如果觉得对你帮助，记得打赏哦。
-
-![591517660778_.pic](https://zuobaiquan.github.io/blogImg/202011/pay1.png)
-
-
