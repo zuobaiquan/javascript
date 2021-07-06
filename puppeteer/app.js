@@ -1,7 +1,7 @@
 
 const puppeteer = require('puppeteer');
 
-const websiteUrl = 'https://github.com/zuobaiquan';
+const websiteUrl = 'https://fundsmile.noah-fund.com/#/fundSupermarket';
 
 (async () => {
   // 启动 puppeteer
@@ -19,6 +19,8 @@ const websiteUrl = 'https://github.com/zuobaiquan';
   // 打开一个页面
   await page.goto(websiteUrl);
 
+  await page.waitFor(3000);
+
   // 页面渲染完毕后，开始截图，全屏
   await page.screenshot({
     path: './shot.jpeg',
@@ -26,4 +28,13 @@ const websiteUrl = 'https://github.com/zuobaiquan';
     type: 'jpeg',
     quality: 100
   });
+  await browser.close();
 })();
+
+// https://www.zhangshengrong.com/p/YjNKnBBLaW/
+// 我们可以使用Puppeteer完成以下工作:
+
+// 访问页面，进行截图
+// 自动进行键盘输入，提交表单
+// 模拟点击等用户操作
+// 等等
