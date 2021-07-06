@@ -1,7 +1,7 @@
 
 const puppeteer = require('puppeteer');
 
-const websiteUrl = 'https://fundsmile.noah-fund.com/#/fundSupermarket';
+const websiteUrl = 'https://www.jd.com/';
 
 (async () => {
   // 启动 puppeteer
@@ -19,7 +19,7 @@ const websiteUrl = 'https://fundsmile.noah-fund.com/#/fundSupermarket';
   // 打开一个页面
   await page.goto(websiteUrl);
 
-  await page.waitFor(3000);
+  await page.waitForTimeout(3000);
 
   // 页面渲染完毕后，开始截图，全屏
   await page.screenshot({
