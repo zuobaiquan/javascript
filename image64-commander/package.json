@@ -1,0 +1,25 @@
+{
+  "name": "image64",
+  "version": "1.0.3",
+  "description": "A cli tool for converting image file to base64 content",
+  "main": "index.js",
+  "scripts": {
+    "test": "node bin/index -f test/example.png"
+  },
+  "bin": {
+    "image64": "./bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuobaiquan/javascript.git"
+  },
+  "keywords": [
+    "image",
+    "base64"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.15.1"
+  }
+}
