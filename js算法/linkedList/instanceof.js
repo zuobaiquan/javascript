@@ -14,6 +14,7 @@ Function.prototype.y = 'y'
 instanceof 原理实现
 */
 const instanceOf = (A, B) => {
+  if (typeof A !== 'object' || A === null) return false
   let p = A
   while (p) {
     if (p == B.prototype) {
@@ -28,6 +29,7 @@ var arr = [1, 2, 3];
 console.log(instanceOf(arr, Array)) // true
 console.log(instanceOf(arr, Object)) // true
 console.log(instanceOf(arr, Function)); // false
+console.log(instanceOf(1, Number)); // false
 /*
 对概念的误区
 100 instanceof Number    //false

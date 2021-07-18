@@ -38,3 +38,15 @@ instanceof 判断一个对象是否是另一个对象的实例，而数字 100 �
 var a = new Number(100)；是通过包装类Number把数字 100 转换成对象，你可以用typeof a，和typeof 100，看看他们返回的值
 
 */
+
+var foo = {}
+var fun = () => { }
+Object.prototype.a = 'value a'
+Function.prototype.b = 'value b'
+
+console.log(foo.a) // value a
+console.log(foo.b) // undefined
+console.log(fun.a) // value a
+console.log(fun.b) // value b
+
+
