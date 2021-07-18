@@ -9,6 +9,25 @@ Object.prototype.x = 'x'
 console.log(obj.x)  // x
 const func = () => { }
 Function.prototype.y = 'y'
+
+/*
+instanceof 原理实现
+*/
+const instanceOf = (A, B) => {
+  let p = A
+  while (p) {
+    if (p == B.prototype) {
+      return true
+    }
+    p = p.__proto__
+  }
+  return false
+}
+
+var arr = [1, 2, 3];
+console.log(instanceOf(arr, Array)) // true
+console.log(instanceOf(arr, Object)) // true
+console.log(instanceOf(arr, Function)); // false
 /*
 对概念的误区
 100 instanceof Number    //false
