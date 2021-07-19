@@ -4,7 +4,8 @@ js 是单线程运行的
 异步要基于回调来实现
 
 event loop 就是异步回调的实现原理
-
+异步（setTimeout、ajax等）使用回调，基于event loop
+DOM事件也使用回调，基于event loop
 
 js 如何执行
 
@@ -18,9 +19,9 @@ event loop执行过程
 2.遇到异步，先记录下，等待时机（定时、网络请求等）
 3.时机到了，就移到 Callback Queue
 
-如果 Call Stack 为空（即同步代码执行完）Event loop开始工作
-轮询查询 Callback Queue，如有则移到 Call Stack 执行
-然后继续轮询查找（永动机一样）
+4.如果 Call Stack 为空（即同步代码执行完）Event loop开始工作
+5.轮询查询 Callback Queue，如有则移到 Call Stack 执行
+6.然后继续轮询查找（永动机一样）
 
 ```js
 console.log('Hi')
