@@ -1,3 +1,13 @@
+async/await 用法
+1.异步回调callback hell
+2.Promise then catch链式调用，但也是基于回调函数
+3.async/await 是同步语法，彻底消灭回调函数，但与 Promise并不互斥，反而，两者相辅相成
+
+执行 async 函数，返回的是 Promise 对象 
+await 相当于 Promise 的 then
+try...catch 可捕获异常，代替了 Promise 的catch
+
+
 ```js
 async function fn(){
   return 100
