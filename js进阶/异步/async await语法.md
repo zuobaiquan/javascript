@@ -7,6 +7,12 @@ async/await 用法
 await 相当于 Promise 的 then
 try...catch 可捕获异常，代替了 Promise 的catch
 
+异步的本质
+aysnc/await 是消灭异步回调的终极武器
+JS还是单线程，还得是有异步，还得是基于 event loop
+aysnc/await只是一个语法糖
+
+
 
 ```js
 async function fn(){

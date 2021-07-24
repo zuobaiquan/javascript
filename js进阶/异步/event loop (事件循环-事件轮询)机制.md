@@ -19,7 +19,7 @@ event loop执行过程
 2.遇到异步，先记录下，等待时机（定时、网络请求等）
 3.时机到了，就移到 Callback Queue
 
-4.如果 Call Stack 为空（即同步代码执行完）Event loop开始工作
+4.如果 Call Stack 为空（即同步代码执行栈完）Event loop开始工作
 5.轮询查询 Callback Queue，如有则移到 Call Stack 执行
 6.然后继续轮询查找（永动机一样）
 
