@@ -9,7 +9,7 @@ webpack性能优化
 7、mode开启production
 8、自动开启代码压缩，自动删除调式代码
 9、启动 tree shaking （ES6 Module 才能让tree shaking生效，commonjs不行）
-10.Scope Hosting（让多个函数合并一个函数，减少作用域，执行更快）
+10.Scope Hosting（让多个函数合并一个函数，减少作用域，执行更快）(打包前webpack自动简化函数结构)
 
 
 ES6 Module 才能让tree shaking生效，commonjs不行
@@ -57,4 +57,27 @@ DllReferencePlugin 使用dll文件
 
 3、同一个版本只构建一次即可，不用每次都重新构建
 
+
+
+前端为何要进行打包和构建
+1、代码方面
+体积更小，加载更快（tree-shaking，压缩合并）
+编译高级语言和语法（ts，es6，模块化）
+兼容性和错误提示（polyfill，postcss，eslint）
+
+2、研发流程
+统一、高效的开发环境
+统一的构建流程和产出标准
+集成公司构建规范（提测，上线）
+
+
+module、chunk、bundle的区别
+1、module
+各个源码文件，webpack中一切皆模块，只要可以引用的都是模块
+
+2、chunk
+多模块合并成的（多个模块的集合），如entry、 import() 异步加载的时候也生成一个chunk、splitChunk拆分代码块的时候定义chunk
+
+3、bundle
+最终的输出文件
 
