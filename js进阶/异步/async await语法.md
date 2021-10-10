@@ -32,7 +32,7 @@ async function fn(){
 async function async1 () {
   console.log('async1 start')
   await async2() // 这一句会同步执行，返回 Promise ，其中的 `console.log('async2')` 也会同步执行
-  console.log('async1 end') // 上面有 await ，下面就变成了“异步”，类似 cakkback 的功能（微任务）
+  console.log('async1 end') // 上面有 await ，下面就变成了“异步”，类似 callback 的功能（微任务）
 }
 
 async function async2 () {
