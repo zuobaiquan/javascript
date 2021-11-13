@@ -11,7 +11,7 @@ type Person1 = {
 // interface 对 对象的形状进行描叙
 // 通用的类型 的 集合 用 interface 表示出来，防止重复写
 interface Person {
-  // readonly name: string;
+  // readonly name: string; // readonly只能读，不能写
   name: string; // name属性 必须有
   age?: number; // age属性 可有可无
   [propName: string]: any; // 其他额外的参数 也可能会有，如果不这么写，自变量类型的话，会提示错误
