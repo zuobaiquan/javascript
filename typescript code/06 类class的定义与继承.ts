@@ -1,11 +1,11 @@
-class Person {
+class Person11 {
   name = 'zuobaiquan';
   getName() {
     return this.name;
   }
 }
 
-class Teacher extends Person {
+class Teacher11 extends Person11 {
   getTeacherName() {
     return 'Teacher';
   }
@@ -15,6 +15,6 @@ class Teacher extends Person {
   }
 }
 
-const teacher = new Teacher();
+const teacher = new Teacher11();
 console.log(teacher.getName());
 console.log(teacher.getTeacherName());
