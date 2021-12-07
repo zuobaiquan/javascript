@@ -1,90 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>luyou</title>
+    <title></title>
     <style>
-        .box {
-            width: 400px;
-            height: 400px;
-            border: 1px solid #ccc;
-        }
+
     </style>
 </head>
+
 <body>
-    <ul> 
-        <li><a href="?/white">turn white</a></li> 
-        <li><a href="?/blue">turn blue</a></li> 
-        <li><a href="?/green">turn green</a></li> 
-        <li><a href="?/pink">turn pink</a></li> 
-    </ul> 
-    <div class="box"></div>
+    <div id="app">
+        <h1>Homepage</h1>
+    </div>
+    <a id="login" href="javascript:;">go login page</a><br />
+    <a id="home" href="javascript:;">go home page</a><br />
+    <a id="detail" href="javascript:;">go detail page</a>
 </body>
+
 </html>
 <script>
-    function HistoryRouter(opts) {
-        this.routes = opts.routes || {};//路由表
-    }
-    HistoryRouter.prototype.route = function(path, callback) { //生成路由
-        this.routes[path] = callback || function(){};
-    };
-    HistoryRouter.prototype.refresh = function(e) {
-        this.routes[e.state.query]();
-    };
-    HistoryRouter.prototype.init = function() { //初始化
-        let obj = {};
-        if (this.routes) {
-            this.routes.forEach(function(v) {
-                obj[v.path] = v.callback || function(){};
-            })
-        }
-        this.routes = obj;
-        window.addEventListener('popstate', this.refresh.bind(this), false);
-    }
-    
-    
-    var routes = [
-        {
-            path: '/',
-            callback: function() {
-                changeBgColor('white');
-            }
-        },
-        {
-            path: '/blue',
-            callback: function() {
-                changeBgColor('blue');
-            }
-        },
-        {
-            path: '/green',
-            callback: function() {
-                changeBgColor('green');
-            }
-        }
-    ]
+    const app = document.getElementById("app")
+    document.getElementById("login").addEventListener("click", e => {
+        window.history.pushState({ 'page_id': 1, 'user_id': 5 }, "login title", '#/login');
+        app.innerHTML = `<h1>login page</h1>`;
+    })
+    document.getElementById("home").addEventListener("click", e => {
+        window.history.pushState(null, "login title", '#/home');
+        app.innerHTML = `<h1>home page</h1>`;
+    })
+    document.getElementById("detail").addEventListener("click", e => {
+        window.history.replaceState(null, "detail title", '#/detail');
+        app.innerHTML = `<h1>detail page</h1>`;
+        console.log('location', location)
+    })
 
-    var historyRouter = new HistoryRouter({
-        routes: routes
-    });
-    historyRouter.init();
-
-    historyRouter.route('/pink', function() {
-        changeBgColor('pink');
-    });
-
-
-    var oBox = document.querySelector('.box');
-    function changeBgColor(color) {
-        oBox.style.backgroundColor = color;
-    }
-    var links = document.querySelectorAll('a');
-    links.forEach(function(v, i) {
-        v.onclick = function(e){
-            var query = v.href.split('?')[1];
-            e.preventDefault(); 
-            historyRouter.routes[query]()
-            history.pushState({query: query}, null, '?'+query);
-        }
+    window.addEventListener('popstate', function (e) {
+        console.log('e', e)
     })
 </script>
