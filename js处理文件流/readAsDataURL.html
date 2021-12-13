@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .show-image {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <input class="chooseFile" type="file" onchange="previewFile()"><br>
+
+  <img class="show-image" src="" height="200" alt="Image preview...">
+</body>
+<script>
+  // 通过FileReader.readAsDataURL(file)可以获取一段data:base64的字符串
+  function previewFile() {
+    const showImage = document.querySelector('.show-image')
+    const file = document.querySelector('.chooseFile').files[0];
+    const reader = new FileReader()
+    if (file) {
+      reader.readAsDataURL(file)
+      reader.onload = function (e) {
+        showImage.style.display = 'block'
+        showImage.src = e.target.result
+      }
+    }
+  }
+</script>
+
+</html>
