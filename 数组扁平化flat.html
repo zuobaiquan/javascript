@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数组扁平化flat</title>
+<script>
+    const list = ['addd', ['cfh哈哈', ['颗粒层kk ', 123456]]]
+    // 1、普通递归
+    const flatten = (arr) => {
+      if(!arr.length){
+          return arr
+      }else{
+        let result = []
+        for(let i=0;i<arr.length;i++){
+          if(Array.isArray(arr[i])){
+            result = [...result,...flatten(arr[i])]
+          }else {
+            result.push(arr[i])
+          }
+        }
+        return result
+      }
+    }
+    console.log(flatten(list)) // ["addd", "cfh哈哈", "颗粒层kk ", 123456]
+
+
+    // 2、toString()
+    list.toString() // 'addd,cfh哈哈,颗粒层kk ,123456'
+    const flatten2 = (arr) => arr.toString().split(',')
+
+
+
+    // 3、es6 提供的新方法 flat(depth)
+    // flat(depth) 方法中的参数 depth，代表展开嵌套数组的深度，默认是 1
+    // depth 的值设置为 Infinity, 无需知道数组的维度
+
+    list.flat(Infinity)
+</script>
+</head>
+<body>
+
+</body>
+</html>
