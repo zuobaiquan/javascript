@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "core-js": "^3.19.3",
-    "element-ui": "^2.15.6",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vue2-toast": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.15",
@@ -41,6 +41,5 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ],
-  "__npminstall_done": false
+  ]
 }

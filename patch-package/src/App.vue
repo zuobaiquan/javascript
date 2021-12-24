@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-input v-model="input" charLength maxlength="6" placeholder="请输入内容"></el-input>
+    <button @click="openTop()">点击</button>
   </div>
 </template>
 
@@ -10,7 +10,11 @@ export default {
   name: 'App',
   data(){
     return {
-      input:''
+    }
+  },
+  methods:{
+    openTop(){
+      this.$toast.top('top')
     }
   }
 }

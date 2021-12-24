@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(ElementUI)
-
 Vue.config.productionTip = false
+
+import 'vue2-toast/lib/toast.css'
+import Toast from 'vue2-toast'
+Vue.use(Toast)
 
 new Vue({
   render: h => h(App),
