@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js 算法类--比较两数组差异</title>
+	<script type="text/javascript">
+		//问题描叙：
+		//这个 function 接收两个数组参数，分别为 arr1 和 arr2。返回值也为一个数组，元素是两数组的差异部分
+		//比如接收的是 [1, 2, 3, 5] 与 [1, 2, 3, 4, 5]，那么输出就是 [4]
+		//需要注意的是，返回值不一定完全来自第二个数组。也就是说，差异部分也有可能包含在第一个数组中。
+		//如：接收的参数是 [1, 2, 3] 与 [1, 2, 4]，那么返回值应该为 [3, 4]
+
+		//方法一 双循环
+		function diff(arr1, arr2) {
+		    // 这个数组用于存储结果
+		    var result = [];
+		    // 在 arr1 中找出不存在于 arr2 的元素
+		    for (var i = 0; i < arr1.length; i++) {
+		        if (arr2.indexOf(arr1[i]) === -1) {
+		            result.push(arr1[i]);
+		        }
+		    }
+		    // 在 arr2 中找出不存在于 arr1 的元素
+		    for (var j = 0; j < arr2.length; j++) {
+		        if (arr1.indexOf(arr2[j]) === -1) {
+		            result.push(arr2[j]);
+		        }
+		    }
+		    return result;
+		}
+
+		//优化 - 封装逻辑 -封装的作用之一就是提取出代码的重复部分，并写成函数 (function)
+		// DRY 的原则，它是 Don’t Repeat Yourself 的缩写
+		//Array.concat()
+		function diff(arr1, arr2) {
+		    // 用 firstArr 和 secondArr 来表示传入的参数，均为数组
+		    function getDiff (firstArr, secondArr) {
+		        // 设置一个变量用于暂存结果
+		        var result = [];
+		        // 逻辑思路是，遍历 firstArr，然后与 secondArr 比较
+		        for (var i = 0; i< firstArr.length; i++) {
+		            if (secondArr.indexOf(firstArr[i]) === -1) {
+		                result.push(firstArr[i]);
+		            }
+		        }
+		        // 这个 result 并不是最终的结果。我们需要对传入的参数操作两次，然后把两次的结果合并起来
+		        return result;
+		    }
+		    return getDiff(arr1, arr2).concat(getDiff(arr2, arr1));
+		}
+
+		//使用数组的 filter 方法
+		//过滤的规则是：只保留不存在于另一个数组中的元素
+		//includes() 方法用来判断当前数组是否包含某指定的值，如果是，则返回 true，否则返回 false。
+		//https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+		function diff(arr1, arr2) {
+		    return arr1.filter(e => arr2.indexOf(e) === -1).concat(
+		        arr2.filter(e => arr1.indexOf(e) === -1)
+		    );
+		}
+
+		//先合并，再过滤
+		function diff(arr1, arr2) {
+		    return arr1.concat(arr2).filter(e => arr1.indexOf(e) === -1 || arr2.indexOf(e) === -1);
+		}
+
+		//原文链接 http://singsing.io/blog/fcc/intermediate-diff-two-arrays/
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

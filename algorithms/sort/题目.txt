@@ -1,0 +1,138 @@
+CSS引入的方式有哪些? link和@import的区别是?
+内联 内嵌 外链 导入
+区别 ：同时加载
+前者无兼容性，后者CSS2.1以下浏览器不支持
+Link 支持使用javascript改变样式，后者不可
+
+写出几种IE6 BUG的解决方法
+1.双边距BUG float引起的 使用display
+2.3像素问题 使用float引起的 使用dislpay:inline -3px
+3.超链接hover 点击后失效 使用正确的书写顺序 link visited hover active
+4.Ie z-index问题 给父级添加position:relative
+5.Png 透明 使用js代码 改
+6.Min-height 最小高度 ！Important 解决’
+7.select 在ie6下遮盖 使用iframe嵌套
+8.为什么没有办法定义1px左右的宽度容器（IE6默认的行高造成的，使用over:hidden,zoom:0.08 line-height:1px）
+
+split() join() 的区别
+前者是切割成数组的形式，后者是将数组转换成字符串
+9.浏览器的内核分别是什么?经常遇到的浏览器的兼容性有哪些？原因，解决方法是什么，常用hack的技巧 ？
+
+    * IE浏览器的内核Trident、 Mozilla的Gecko、google的WebKit、Opera内核Presto；
+
+    * png24为的图片在iE6浏览器上出现背景，解决方案是做成PNG8.
+
+    * 浏览器默认的margin和padding不同。解决方案是加一个全局的*{margin:0;padding:0;}来统一。
+
+    * IE6双边距bug:块属性标签float后，又有横行的margin情况下，在ie6显示margin比设置的大。 
+
+      浮动ie产生的双倍距离 #box{ float:left; width:10px; margin:0 0 0 100px;} 
+
+     这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 ——_display:inline;将其转化为行内属性。(_这个符号只有ie6会识别)
+
+      渐进识别的方式，从总体中逐渐排除局部。 
+
+      首先，巧妙的使用“\9”这一标记，将IE游览器从所有情况中分离出来。 
+      接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。
+
+      css
+          .bb{
+           background-color:#f1ee18;/*所有识别*/
+          .background-color:#00deff\9; /*IE6、7、8识别*/
+          +background-color:#a200ff;/*IE6、7识别*/
+          _background-color:#1e0bd1;/*IE6识别*/
+
+          } 
+
+    *  IE下,可以使用获取常规属性的方法来获取自定义属性,
+       也可以使用getAttribute()获取自定义属性;
+       Firefox下,只能使用getAttribute()获取自定义属性. 
+       解决方法:统一通过getAttribute()获取自定义属性.
+
+    *  IE下,even对象有x,y属性,但是没有pageX,pageY属性; 
+      Firefox下,event对象有pageX,pageY属性,但是没有x,y属性.
+
+    * （条件注释）缺点是在IE浏览器下可能会增加额外的HTTP请求数。
+
+    * Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示, 可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决.
+
+    超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
+    L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+
+
+//9.什么是FOUC？你如何来避免FOUC？
+/*由于css引入使用了@import 或者存在多个style标签以及css文件在页面底部引入使得css文件加载在html之后导致页面闪烁、花屏
+用link加载css文件，放在head标签里面*/
+
+6.IE和DOM事件流的区别
+1.执行顺序不一样、
+2.参数不一样
+3.事件加不加on
+4.this指向问题
+
+/*前端开发的优化问题
+（1） 减少http请求次数：css spirit,data uri
+（2） JS，CSS源码压缩
+（3） 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+（4） 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能
+（5） 用setTimeout来避免页面失去响应
+（6） 用hash-table来优化查找
+（7） 当需要设置的样式很多时设置className而不是直接操作style
+（8） 少用全局变量
+（9） 缓存DOM节点查找的结果
+（10） 避免使用CSS Expression
+（11） 图片预载
+（12） 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢
+*/
+/* 请设计一套方案，用于确保页面中JS加载完全。*/
+var n = document.createElement("script");
+n.type = "text/javascript";
+//以上省略部分代码
+//ie支持script的readystatechange属性
+if(ua.ie){
+  n.onreadystatechange = function(){
+    var rs = this.readyState;
+    if('loaded' === rs || 'complete'===rs){
+      n.onreadystatechange = null;
+           f(id,url); //回调函数
+       }
+   };
+//省略部分代码
+//safari 3.x supports the load event for script nodes(DOM2)
+n.addEventListener('load',function(){
+  f(id,url);
+});
+//firefox and opera support onload(but not dom2 in ff) handlers for
+//script nodes. opera, but no ff, support the onload event for link
+//nodes.
+}else{
+  n.onload = function(){
+    f(id,url);
+  };
+}
+//请设计一套方案，用于确保页面中JS加载完全。
+var n = document.createElement("script");
+n.type = "text/javascript";
+//以上省略部分代码
+//ie支持script的readystatechange属性
+if(ua.ie){
+  n.onreadystatechange = function(){
+    var rs = this.readyState;
+    if('loaded' === rs || 'complete'===rs){
+      n.onreadystatechange = null;
+           f(id,url); //回调函数
+       }
+   };
+//省略部分代码
+//safari 3.x supports the load event for script nodes(DOM2)
+n.addEventListener('load',function(){
+  f(id,url);
+});
+//firefox and opera support onload(but not dom2 in ff) handlers for
+//script nodes. opera, but no ff, support the onload event for link
+//nodes.
+}else{
+  n.onload = function(){
+    f(id,url);
+  };
+}

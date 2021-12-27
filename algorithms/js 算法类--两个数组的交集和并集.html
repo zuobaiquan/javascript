@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js 算法类--两个数组的交集和并集等</title>
+	<script type="text/javascript">
+
+		//求两个数组的交集 方法1
+		function fn1(aArr,bArr){
+ 		  var newArr=[];
+ 		  for (var i =0 ; i < aArr.length ; i++) {
+ 		  	 if((bArr.includes(aArr[i]))&&(!newArr.includes(aArr[i]))){
+	   	 		newArr.push(aArr[i]);
+	   	 	 }
+ 		  }
+ 		  return newArr;
+		}
+		var a=[2,3,4,3,2],b=[2,5,1,6,3];
+		console.log("fn1",fn1(a,b));
+
+		//求两个数组的交集 方法2
+		function fn2(aArr,bArr){
+ 		  var newArr=[];
+ 		  for (var i =0 ; i < aArr.length ; i++) {
+         	for (var j =0 ; j < bArr.length ; j++) {
+         		if((bArr[j]==aArr[i])&&(newArr.indexOf(aArr[i])==-1)){
+					newArr.push(aArr[i]);
+         		}
+         	}
+ 		  }
+ 		  return newArr;
+		}
+		console.log("fn2",fn2(a,b));
+
+
+		//求两个数组的交集
+		function fn3(aArr,bArr){
+			let intersection = aArr.filter(v => bArr.includes(v))
+			return [...new Set(intersection)];
+		}
+		console.log("fn3",fn3(a,b));
+
+		//求两个数组的并集
+		function fn4(aArr,bArr){
+ 		    const res = new Set();
+			let newArr = aArr.concat(bArr);
+		    newArr.forEach(x => res.add(x));
+		    return [...res];
+		    //return [...new Set(newArr)];
+		    //return res;
+		}
+		console.log("fn4",fn4(a,b));
+
+
+
+		//找出数组中不同差异的元素
+		function fn5(aArr,bArr){
+			let difference = aArr.concat(bArr).filter(v => !aArr.includes(v) || !bArr.includes(v));
+			return difference;
+		}
+		console.log("fn5",fn5(a,b));
+
+		//找出数组中不同差异的元素
+		function fn6(aArr,bArr){
+			let aSet = new Set(aArr);
+		    let bSet = new Set(bArr);
+		    return aArr.concat(bArr).filter(v => !aSet.has(v) || !bSet.has(v));
+		}
+		console.log("fn6",fn6(a,b));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>hay

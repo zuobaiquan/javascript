@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js 算法类--对象长度</title>
+	<script type="text/javascript">
+		Object.size = function(obj) {
+	        var size = 0;
+	        for (var key in obj) {
+	            if (obj.hasOwnProperty(key)) size++;
+	        }
+	        return size;
+	    };
+	    objname = {a:'11',b:{c:'22',d:'33',e:'44'},f:3};
+	    console.log(Object.size(objname)); // 3
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

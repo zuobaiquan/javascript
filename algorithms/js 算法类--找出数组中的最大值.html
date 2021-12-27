@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js 算法类--对象长度</title>
+	<script type="text/javascript">
+		//方法一 reduce 
+		var arr1 = [6, 4, 1, 8, 2, 11, 3];
+		function maxFun1 (prev, next) {
+		    return Math.max(prev, next)
+		}
+		console.log(arr1.reduce(maxFun1));
+
+		//方法二 apply 
+		var arr2 = [6, 4, 1, 8, 2, 11, 3];
+		console.log(Math.max.apply(null, arr2));
+
+		//es6 剩余参数
+		var arr3 = [6, 4, 1, 8, 2, 11, 3];
+		function maxFun3 (arr) {
+		    return Math.max(...arr);
+		}
+		console.log(maxFun3(arr3));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
