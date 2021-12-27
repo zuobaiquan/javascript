@@ -1,6 +1,8 @@
 
 # patch-package 安装
 
+https://github.com/ds300/patch-package
+
 npm install patch-package --save-dev
 
 
