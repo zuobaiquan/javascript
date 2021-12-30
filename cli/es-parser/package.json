@@ -1,19 +1,11 @@
 {
-  "name": "imooc-es-parser",
+  "name": "es-ex",
   "version": "1.0.0",
-  "description": "imooc-es-parser",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --mode=development --config ./build/webpack.config.js",
     "build": "webpack --mode=production --config ./build/webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "xiecheng",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xiecheng328/imooc-es-parser.git"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
