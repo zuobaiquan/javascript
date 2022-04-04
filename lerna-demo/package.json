@@ -1,0 +1,14 @@
+{
+  "name": "lerna-demo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "dev:sit2": "lerna --scope vue-sit2 run serve",
+    "dev:sit1": "lerna --scope vue-sit1 run serve"
+  }
+}
