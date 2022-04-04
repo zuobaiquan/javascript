@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body></body>
+<script type="text/javascript">
+  let str = ''
+  let temp = ''
+  // 先做一个 10KB 的字符串
+  while (str.length !== 10240) {
+    str = str + '0123456789'
+  }
+
+  // 以最小 10kb 为单位 累加
+
+
+  const computedTotal = () => {
+    return new Promise((resolve, reject) => {
+      const timer = setInterval(() => {
+        try {
+          console.log(123456)
+          localStorage.setItem('temp', temp)
+        } catch (error) {
+          console.log('error', error)
+          console.log(1, temp.length)
+          clearInterval(timer)
+          // 统计完记得清空
+          localStorage.clear()
+          resolve()
+        }
+        temp += str
+      }, 0)
+    })
+  }
+
+  (async () => {
+    await computedTotal()
+    // console.log(`最大容量${total}KB`)
+  })()
+
+
+  // 当前已使用的 localStorage 空间
+  const computedUse = () => {
+    let cache = 0
+    for (let key in localStorage) {
+      if (localStorage.hasOwnProperty(key)) {
+        cache += localStorage.getItem(key).length
+      }
+    }
+    return (cache / 1024).toFixed(2)
+  }
+
+  // 剩余可用容量 = 总容量 - 已使用容量
+
+</script>
+
+</html>
