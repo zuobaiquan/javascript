@@ -28,6 +28,7 @@
           localStorage.setItem('temp', temp)
         } catch (error) {
           console.log('error', error)
+          //超出内存空间报错： error DOMException: Failed to execute 'setItem' on 'Storage': Setting the value of 'temp' exceeded the quota.
           console.log(1, temp.length)
           clearInterval(timer)
           // 统计完记得清空
