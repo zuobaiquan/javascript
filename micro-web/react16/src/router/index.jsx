@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, hashHistory, Redirect } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 
 // 资讯页面
 import Information from '../pages/information/index.jsx'

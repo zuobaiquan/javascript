@@ -43,7 +43,7 @@ class VideoList extends React.Component {
     return (
       <div className="video-container">
         {
-          navList.map(v => <div>{v.value}--{v.label}</div>)
+          navList.map(v => <div key={v.value}>{v.value}--{v.label}</div>)
         }
       </div>
     )
